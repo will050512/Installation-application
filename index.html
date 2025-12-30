@@ -42,7 +42,7 @@
             @apply absolute inset-0 text-white text-lg font-black flex items-center justify-center;
         }
         
-        /* 防止行動端字體過小 */
+        /* 防止行動端字體過小導致自動縮放 */
         input, select, textarea {
             font-size: 16px !important;
         }
@@ -69,7 +69,7 @@
                             軟體安裝<br><span class="text-blue-600">申請系統</span>
                         </h1>
                         <p class="mt-4 text-slate-500 leading-relaxed font-medium text-base">
-                            專業、快速、數位化的設備安裝服務。
+                             專業、快速、數位化的設備安裝服務。
                         </p>
                     </header>
 
@@ -116,7 +116,7 @@
                             
                             <!-- Email 驗證區 -->
                             <div class="bg-blue-600 p-6 md:p-8 rounded-[2rem] shadow-xl shadow-blue-100 mb-8 text-white">
-                                <label class="block text-sm font-black mb-3 ml-1">電子郵件驗證 (供電子發票使用) *</label>
+                                <label class="block text-sm font-black mb-3 ml-1 leading-snug">電子郵件驗證 (供開立、寄送電子發票使用) *</label>
                                 <div class="flex flex-col sm:flex-row gap-3">
                                     <input type="email" id="email" name="email" required placeholder="請填寫正確信箱" class="flex-grow px-5 py-4 rounded-2xl bg-white border-none outline-none text-slate-900 font-bold">
                                     <button type="button" id="sendCodeBtn" onclick="sendVerificationCode()" class="bg-slate-900 text-white px-8 py-4 rounded-2xl font-black hover:bg-black active:scale-95 transition-all shadow-xl">
@@ -149,7 +149,8 @@
                                 <h2 class="text-2xl font-black tracking-tight text-slate-800">規格確認與設備資訊</h2>
                             </div>
 
-                            <div class="mb-8 p-6 bg-amber-50 rounded-[2rem] border-2 border-amber-200 shadow-sm">
+                            <!-- 規格確認 -->
+                            <div class="mb-6 p-6 bg-amber-50 rounded-[2rem] border-2 border-amber-200 shadow-sm">
                                 <div class="flex gap-4">
                                     <input type="checkbox" id="specConfirmed" class="custom-checkbox" onchange="checkRequirements()">
                                     <div class="flex-1 space-y-2">
@@ -158,6 +159,32 @@
                                         </label>
                                         <p class="text-amber-800 text-[12px] leading-relaxed font-medium">
                                             本人確認欲安裝軟體之設備已事先透過官方 LINE 獲得技術人員核可。
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 包裹安全提醒 -->
+                            <div class="mb-8 p-6 bg-blue-50 rounded-[2rem] border border-blue-100 space-y-4">
+                                <div class="flex items-start gap-4">
+                                    <div class="bg-blue-100 text-blue-600 p-2.5 rounded-xl flex-shrink-0">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l2-1.14"/><path d="m7.5 4.27 9 5.15"/><polyline points="3.29 7 12 12 20.71 7"/><line x1="12" y1="22" x2="12" y2="12"/></svg>
+                                    </div>
+                                    <div class="space-y-1">
+                                        <p class="font-black text-blue-900 text-sm italic underline tracking-tight">包裹安全提醒 (寄送前必看)</p>
+                                        <p class="text-blue-800 text-[12px] leading-relaxed font-medium">
+                                            為避免寄送途中發生碰撞，請務必使用<span class="bg-blue-200 px-1 rounded mx-0.5">氣泡袋、充足緩衝材</span>將設備完整包裹。若因保護不足導致運送受損，風險由寄件人自行負擔。
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-4 pt-3 border-t border-blue-200/50">
+                                    <div class="bg-blue-100 text-blue-600 p-2.5 rounded-xl flex-shrink-0">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+                                    </div>
+                                    <div class="space-y-1">
+                                        <p class="font-black text-blue-900 text-sm tracking-tight">開箱作業透明化</p>
+                                        <p class="text-blue-800 text-[12px] leading-relaxed font-medium">
+                                            本公司收到您的包裹後，將進行<span class="text-blue-600 font-black">【全程開箱錄影】</span>並回傳紀錄給您，以確保雙方權益與設備狀態完整。
                                         </p>
                                     </div>
                                 </div>
@@ -316,7 +343,10 @@
         <div class="bg-white rounded-[3rem] p-10 max-w-sm w-full text-center shadow-2xl animate-in zoom-in duration-500">
             <div class="w-24 h-24 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-8 text-5xl font-black shadow-inner">✓</div>
             <h3 class="text-3xl font-black text-slate-900 mb-4 tracking-tight">申請單已送出</h3>
-            <p class="text-blue-600 leading-relaxed mb-6 text-lg font-black underline underline-offset-8">請記得寄送平板設備</p>
+            <div class="space-y-2 mb-8">
+                <p class="text-blue-600 text-lg font-black underline underline-offset-8 decoration-2 decoration-blue-200">請務必加強包裝寄送</p>
+                <p class="text-slate-500 text-xs font-bold leading-relaxed">※ 收到設備後我們將全程開箱錄影回饋給您</p>
+            </div>
             <p class="text-slate-400 leading-relaxed mb-10 text-sm font-medium">確認明細已寄至您的信箱，<br>核對款項後將儘速聯繫。</p>
             <button onclick="location.reload()" class="w-full bg-slate-900 text-white py-5 rounded-2xl font-black text-lg hover:bg-black transition-all">完成填寫</button>
         </div>
@@ -357,7 +387,7 @@
                         <span class="px-2 py-0.5 bg-blue-500/20 text-blue-300 rounded text-[10px] font-bold">客戶端</span>
                         <p class="text-white font-medium">自行將設備送至本公司</p>
                     </div>
-                    <div class="flex items-center gap-3">
+                    <div class="flex items-center gap-3 border-t border-white/5 pt-2">
                         <span class="px-2 py-0.5 bg-blue-500/20 text-blue-300 rounded text-[10px] font-bold">客戶端</span>
                         <p class="text-white font-medium">完工後自行至本公司取回</p>
                     </div>
@@ -368,20 +398,20 @@
                 detailHtml = `
                     <div class="flex items-center gap-3">
                         <span class="px-2 py-0.5 bg-blue-500/20 text-blue-300 rounded text-[10px] font-bold">客戶端</span>
-                        <p class="text-white font-medium">自行包裹並寄送至本公司</p>
+                        <p class="text-white font-medium">自行<span class="text-blue-300 underline underline-offset-2">加強包裝</span>寄送至本公司</p>
                     </div>
                     <div class="flex items-center gap-3 border-t border-white/5 pt-2">
                         <span class="px-2 py-0.5 bg-emerald-500/20 text-emerald-400 rounded text-[10px] font-bold">公司端</span>
                         <p class="text-white font-medium">完工後安排物流寄還給您</p>
                     </div>
-                    <p class="text-slate-400 text-xs mt-2 italic">※ 200 元為單趟寄還之物流費</p>
+                    <p class="text-slate-400 text-xs mt-2 italic">※ 我們收到後將【全程開箱錄影】</p>
                 `;
             } else if (method === "來回件") {
                 shipFee = 400;
                 detailHtml = `
                     <div class="flex items-center gap-3">
                         <span class="px-2 py-0.5 bg-emerald-500/20 text-emerald-400 rounded text-[10px] font-bold">公司端</span>
-                        <p class="text-white font-medium">派車至您的地址取件 (需自行包裝)</p>
+                        <p class="text-white font-medium">派車取件 (<span class="text-blue-300 underline underline-offset-2">請務必事先加強包裹</span>)</p>
                     </div>
                     <div class="flex items-center gap-3 border-t border-white/5 pt-2">
                         <span class="px-2 py-0.5 bg-emerald-500/20 text-emerald-400 rounded text-[10px] font-bold">公司端</span>
