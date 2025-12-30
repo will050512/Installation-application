@@ -1,242 +1,364 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="zh-TW" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>萬里遊軟體安裝申請單</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>萬里遊軟體安裝申請單 | 專業數位化服務</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Noto Sans TC', sans-serif; -webkit-tap-highlight-color: transparent; }
-        .input-focus-effect:focus { @apply ring-4 ring-blue-500/10 border-blue-500; }
-        .glass-card { background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(10px); }
-        @keyframes pulse-soft { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
-        .loading-pulse { animation: pulse-soft 1.5s infinite; }
+        body { 
+            font-family: 'Noto Sans TC', sans-serif; 
+            -webkit-tap-highlight-color: transparent;
+            word-break: break-all;
+        }
+        .step-active { @apply border-blue-600 text-blue-600 font-bold; }
+        .input-focus-effect:focus { @apply ring-4 ring-blue-500/10 border-blue-600 shadow-sm; }
+        
+        /* 隱藏滾動條但保持功能 */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* 背景微光效果 */
+        .mesh-gradient {
+            background-color: #f8fafc;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.05) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, rgba(147, 51, 234, 0.05) 0px, transparent 50%);
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .animate-slide-up { animation: slideUp 0.5s ease-out forwards; }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-900 pb-10">
+<body class="mesh-gradient min-h-screen text-slate-800 antialiased">
 
-    <div class="max-w-2xl mx-auto">
-        <!-- 手機版優化 Header -->
-        <header class="bg-white border-b border-slate-200 px-6 py-8 text-center sticky top-0 z-30 shadow-sm md:static md:bg-transparent md:border-none">
-            <h1 class="text-2xl font-black tracking-tight text-slate-900 md:text-4xl">軟體安裝申請單</h1>
-            <p class="text-slate-500 text-sm mt-1">萬里遊科技 · 數位化便捷申請</p>
-        </header>
+    <!-- 手機版進度條 -->
+    <div class="fixed top-0 left-0 w-full h-1 z-50 bg-slate-100 md:hidden">
+        <div id="scrollProgress" class="h-full bg-blue-600 w-0 transition-all duration-150"></div>
+    </div>
 
-        <form id="applicationForm" class="px-4 py-6 space-y-6 md:px-0">
+    <div class="max-w-6xl mx-auto px-4 py-8 md:py-16">
+        <div class="flex flex-col lg:flex-row gap-12">
             
-            <!-- 步驟 1：身分驗證 -->
-            <section class="glass-card rounded-[2rem] shadow-sm border border-slate-200 overflow-hidden">
-                <div class="bg-blue-600 px-6 py-4 flex justify-between items-center">
-                    <h2 class="text-white font-bold flex items-center gap-2">
-                        <span class="bg-white/20 w-6 h-6 rounded-full flex items-center justify-center text-xs text-white">1</span>
-                        基本資料與驗證
-                    </h2>
+            <!-- 左側資訊欄 (桌面端固定) -->
+            <aside class="lg:w-1/3 space-y-8">
+                <div class="lg:sticky lg:top-16">
+                    <header class="mb-10 animate-slide-up">
+                        <div class="inline-block bg-blue-600 text-white px-3 py-1 rounded-lg text-xs font-bold mb-4 uppercase tracking-widest">Wan Li You Tech</div>
+                        <h1 class="text-4xl font-black text-slate-900 leading-tight md:text-5xl">軟體安裝<br>申請系統</h1>
+                        <p class="mt-4 text-slate-500 leading-relaxed">請完成以下四個步驟，我們將在核對資料後儘速為您的設備進行軟體安裝與優化服務。</p>
+                    </header>
+
+                    <!-- 步驟導覽 (桌面端) -->
+                    <nav class="hidden lg:block space-y-4">
+                        <a href="#step1" class="step-nav flex items-center gap-4 p-4 rounded-2xl border-2 border-transparent hover:bg-white transition-all group" data-step="step1">
+                            <span class="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center font-bold group-hover:bg-blue-50 transition-colors">1</span>
+                            <span class="font-medium text-slate-400 group-[.step-active]:text-blue-600">基本資料與驗證</span>
+                        </a>
+                        <a href="#step2" class="step-nav flex items-center gap-4 p-4 rounded-2xl border-2 border-transparent hover:bg-white transition-all group" data-step="step2">
+                            <span class="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center font-bold group-hover:bg-blue-50 transition-colors">2</span>
+                            <span class="font-medium text-slate-400 group-[.step-active]:text-blue-600">設備資訊紀錄</span>
+                        </a>
+                        <a href="#step3" class="step-nav flex items-center gap-4 p-4 rounded-2xl border-2 border-transparent hover:bg-white transition-all group" data-step="step3">
+                            <span class="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center font-bold group-hover:bg-blue-50 transition-colors">3</span>
+                            <span class="font-medium text-slate-400 group-[.step-active]:text-blue-600">費用結算</span>
+                        </a>
+                        <a href="#step4" class="step-nav flex items-center gap-4 p-4 rounded-2xl border-2 border-transparent hover:bg-white transition-all group" data-step="step4">
+                            <span class="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center font-bold group-hover:bg-blue-50 transition-colors">4</span>
+                            <span class="font-medium text-slate-400 group-[.step-active]:text-blue-600">匯款對帳</span>
+                        </a>
+                    </nav>
                 </div>
-                <div class="p-6 space-y-5">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-xs font-bold text-slate-500 uppercase mb-1 ml-1">訂購人姓名 *</label>
-                            <input type="text" name="name" required class="w-full px-4 py-3.5 rounded-2xl border border-slate-200 outline-none input-focus-effect transition-all" placeholder="填寫姓名">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-bold text-slate-500 uppercase mb-1 ml-1">連絡電話 *</label>
-                            <input type="tel" name="phone" required class="w-full px-4 py-3.5 rounded-2xl border border-slate-200 outline-none input-focus-effect transition-all" placeholder="手機號碼">
-                        </div>
-                    </div>
+            </aside>
+
+            <!-- 右側表單區 -->
+            <main class="lg:w-2/3">
+                <form id="applicationForm" class="space-y-8 pb-32 lg:pb-12">
                     
-                    <div class="bg-blue-50/50 p-4 rounded-2xl border border-blue-100">
-                        <label class="block text-xs font-bold text-blue-800 uppercase mb-2 ml-1">電子郵件驗證 *</label>
-                        <div class="space-y-3">
-                            <div class="flex gap-2">
-                                <input type="email" id="email" name="email" required placeholder="example@mail.com" class="flex-grow px-4 py-3.5 rounded-2xl border border-blue-200 outline-none focus:border-blue-500">
-                                <button type="button" id="sendCodeBtn" onclick="sendVerificationCode()" class="bg-blue-600 text-white px-4 rounded-2xl font-bold text-sm whitespace-nowrap active:scale-95 transition-all shadow-md shadow-blue-200">
-                                    獲取驗證碼
-                                </button>
+                    <!-- 步驟 1 -->
+                    <section id="step1" class="bg-white rounded-[2.5rem] shadow-xl shadow-slate-200/50 border border-slate-100 overflow-hidden animate-slide-up" style="animation-delay: 0.1s">
+                        <div class="px-8 py-10">
+                            <div class="flex items-center gap-3 mb-8">
+                                <span class="bg-blue-600 text-white w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold">1</span>
+                                <h2 class="text-2xl font-black">基本資料與驗證</h2>
                             </div>
                             
-                            <div id="verifyInputArea" class="hidden flex gap-2 animate-in fade-in slide-in-from-top-2 duration-300">
-                                <input type="text" id="verifyCode" maxlength="6" placeholder="輸入 6 位數" class="flex-grow px-4 py-3.5 rounded-2xl border border-slate-300 text-center font-mono text-xl tracking-widest outline-none focus:border-blue-500">
-                                <button type="button" onclick="verifyEmailCode()" class="bg-emerald-600 text-white px-6 rounded-2xl font-bold active:scale-95 transition-all">
-                                    驗證
-                                </button>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                                <div class="space-y-2">
+                                    <label class="text-sm font-bold text-slate-500 ml-1">訂購人姓名</label>
+                                    <input type="text" name="name" required class="w-full px-5 py-4 rounded-2xl bg-slate-50 border border-slate-200 outline-none input-focus-effect transition-all text-base" placeholder="請輸入姓名">
+                                </div>
+                                <div class="space-y-2">
+                                    <label class="text-sm font-bold text-slate-500 ml-1">連絡電話</label>
+                                    <input type="tel" name="phone" required inputmode="tel" class="w-full px-5 py-4 rounded-2xl bg-slate-50 border border-slate-200 outline-none input-focus-effect transition-all text-base" placeholder="09XX-XXX-XXX">
+                                </div>
                             </div>
-                            <div id="emailStatus" class="text-xs ml-1 font-medium"></div>
-                        </div>
-                    </div>
+                            
+                            <div class="bg-blue-50/50 p-6 rounded-[2rem] border border-blue-100 mb-8">
+                                <label class="block text-sm font-bold text-blue-900 mb-3 ml-1">電子郵件驗證</label>
+                                <div class="flex flex-col sm:flex-row gap-3">
+                                    <input type="email" id="email" name="email" required placeholder="example@mail.com" class="flex-grow px-5 py-4 rounded-2xl bg-white border border-blue-200 outline-none focus:border-blue-600 text-base">
+                                    <button type="button" id="sendCodeBtn" onclick="sendVerificationCode()" class="bg-blue-600 text-white px-8 py-4 rounded-2xl font-bold hover:bg-blue-700 active:scale-95 transition-all shadow-lg shadow-blue-200 whitespace-nowrap">
+                                        獲取驗證碼
+                                    </button>
+                                </div>
+                                <div id="verifyInputArea" class="hidden mt-4 animate-in fade-in slide-in-from-top-2">
+                                    <div class="flex gap-3">
+                                        <input type="text" id="verifyCode" maxlength="6" inputmode="numeric" placeholder="6 位驗證碼" class="flex-grow px-5 py-4 rounded-2xl border border-slate-300 text-center font-mono text-xl tracking-widest outline-none focus:border-blue-600">
+                                        <button type="button" onclick="verifyEmailCode()" class="bg-slate-900 text-white px-8 py-4 rounded-2xl font-bold hover:bg-black active:scale-95 transition-all">
+                                            驗證
+                                        </button>
+                                    </div>
+                                </div>
+                                <p id="emailStatus" class="text-xs mt-3 ml-1 font-medium min-h-[1.25rem]"></p>
+                            </div>
 
-                    <div>
-                        <label class="block text-xs font-bold text-slate-500 uppercase mb-1 ml-1">收件地址 *</label>
-                        <input type="text" name="address" required class="w-full px-4 py-3.5 rounded-2xl border border-slate-200 outline-none input-focus-effect transition-all" placeholder="請填寫完整地址">
-                    </div>
-                </div>
-            </section>
-
-            <!-- 步驟 2：設備詳情 -->
-            <section class="glass-card rounded-[2rem] shadow-sm border border-slate-200 overflow-hidden">
-                <div class="bg-slate-800 px-6 py-4">
-                    <h2 class="text-white font-bold flex items-center gap-2">
-                        <span class="bg-white/20 w-6 h-6 rounded-full flex items-center justify-center text-xs text-white">2</span>
-                        設備資訊紀錄
-                    </h2>
-                </div>
-                <div class="p-6 space-y-6">
-                    <div class="bg-slate-50 p-4 rounded-2xl border border-dashed border-slate-300">
-                        <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3">原平板資訊 (非必填)</p>
-                        <div class="grid grid-cols-2 gap-3">
-                            <input type="text" name="old_model" placeholder="原平板型號" class="px-3 py-3 rounded-xl border border-slate-200 text-sm outline-none">
-                            <input type="text" name="old_sn" placeholder="原平板序號" class="px-3 py-3 rounded-xl border border-slate-200 text-sm outline-none">
+                            <div class="space-y-2">
+                                <label class="text-sm font-bold text-slate-500 ml-1">收件地址</label>
+                                <input type="text" name="address" required class="w-full px-5 py-4 rounded-2xl bg-slate-50 border border-slate-200 outline-none input-focus-effect transition-all text-base" placeholder="請填寫收件完整地址">
+                            </div>
                         </div>
-                    </div>
-                    <div class="space-y-4">
-                        <p class="text-[10px] font-black text-indigo-500 uppercase tracking-widest mb-1 ml-1">欲安裝設備 *</p>
-                        <input type="text" name="new_brand" required placeholder="設備廠牌 (如 Samsung)" class="w-full px-4 py-3.5 rounded-2xl border border-slate-200 outline-none input-focus-effect">
-                        <div class="grid grid-cols-2 gap-3">
-                            <input type="text" name="new_model" required placeholder="型號" class="w-full px-4 py-3.5 rounded-2xl border border-slate-200 outline-none input-focus-effect">
-                            <input type="text" name="new_sn" required placeholder="序號 (S/N)" class="w-full px-4 py-3.5 rounded-2xl border border-slate-200 outline-none input-focus-effect">
-                        </div>
-                    </div>
-                </div>
-            </section>
+                    </section>
 
-            <!-- 步驟 3：金額計算 -->
-            <section class="bg-slate-900 rounded-[2.5rem] p-8 shadow-xl relative overflow-hidden text-white">
-                <div class="absolute top-0 right-0 w-32 h-32 bg-blue-500/20 blur-3xl rounded-full -mr-16 -mt-16"></div>
-                <h2 class="text-blue-400 text-[10px] font-black uppercase tracking-[0.2em] mb-6">Checkout / 費用結算</h2>
-                
-                <div class="space-y-5">
-                    <div class="flex justify-between items-center border-b border-slate-800 pb-4">
-                        <span class="text-slate-400 text-sm">物流方式</span>
-                        <select id="shippingMethod" name="shipping_method" class="bg-slate-800 text-white px-3 py-2 rounded-xl text-sm outline-none border-none focus:ring-2 focus:ring-blue-500" onchange="updateTotal()">
-                            <option value="自行取件">自取 ($0)</option>
-                            <option value="一般寄送" selected>寄送 ($200)</option>
-                            <option value="來回件">來回件 ($400)</option>
-                        </select>
+                    <!-- 步驟 2 -->
+                    <section id="step2" class="bg-white rounded-[2.5rem] shadow-xl shadow-slate-200/50 border border-slate-100 overflow-hidden animate-slide-up" style="animation-delay: 0.2s">
+                        <div class="px-8 py-10">
+                            <div class="flex items-center gap-3 mb-8">
+                                <span class="bg-slate-800 text-white w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold">2</span>
+                                <h2 class="text-2xl font-black text-slate-800">設備資訊紀錄</h2>
+                            </div>
+                            
+                            <div class="bg-slate-50 p-6 rounded-[2rem] border border-dashed border-slate-300 mb-8">
+                                <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">原平板資訊 (選填)</p>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                    <input type="text" name="old_model" placeholder="原平板型號" class="px-5 py-3.5 rounded-xl border border-slate-200 bg-white outline-none focus:border-slate-400">
+                                    <input type="text" name="old_sn" placeholder="原平板序號" class="px-5 py-3.5 rounded-xl border border-slate-200 bg-white outline-none focus:border-slate-400">
+                                </div>
+                            </div>
+
+                            <div class="space-y-6">
+                                <div class="space-y-2">
+                                    <label class="text-sm font-bold text-slate-500 ml-1 italic">欲安裝設備廠牌 (如 Samsung)</label>
+                                    <input type="text" name="new_brand" required class="w-full px-5 py-4 rounded-2xl bg-slate-50 border border-slate-200 outline-none input-focus-effect text-base">
+                                </div>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                    <div class="space-y-2">
+                                        <label class="text-sm font-bold text-slate-500 ml-1">型號</label>
+                                        <input type="text" name="new_model" required class="w-full px-5 py-4 rounded-2xl bg-slate-50 border border-slate-200 outline-none input-focus-effect text-base">
+                                    </div>
+                                    <div class="space-y-2">
+                                        <label class="text-sm font-bold text-slate-500 ml-1">序號 (S/N)</label>
+                                        <input type="text" name="new_sn" required class="w-full px-5 py-4 rounded-2xl bg-slate-50 border border-slate-200 outline-none input-focus-effect text-base">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 步驟 3 -->
+                    <section id="step3" class="bg-slate-900 rounded-[3rem] p-10 shadow-2xl relative overflow-hidden text-white animate-slide-up" style="animation-delay: 0.3s">
+                        <div class="absolute top-0 right-0 w-64 h-64 bg-blue-600/10 blur-[100px] rounded-full -mr-32 -mt-32"></div>
+                        
+                        <div class="relative z-10">
+                            <div class="flex items-center gap-3 mb-10">
+                                <span class="bg-blue-500 text-white w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold">3</span>
+                                <h2 class="text-2xl font-black">Checkout 費用結算</h2>
+                            </div>
+                            
+                            <div class="space-y-6 max-w-md">
+                                <div class="flex justify-between items-center p-4 bg-white/5 rounded-2xl border border-white/10">
+                                    <span class="text-slate-400">選擇物流方式</span>
+                                    <select id="shippingMethod" name="shipping_method" class="bg-slate-800 text-white px-4 py-2 rounded-xl text-sm outline-none border border-slate-700 cursor-pointer hover:bg-slate-700 transition-colors" onchange="updateTotal()">
+                                        <option value="自行取件">現場自取 ($0)</option>
+                                        <option value="一般寄送" selected>物流寄送 ($200)</option>
+                                        <option value="來回件">專人來回件 ($400)</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="space-y-3 px-2">
+                                    <div class="flex justify-between text-slate-400">
+                                        <span class="text-sm">軟體安裝及優化費用</span>
+                                        <span class="font-mono">$1,200</span>
+                                    </div>
+                                    <div class="flex justify-between text-slate-400">
+                                        <span class="text-sm">物流手續費用</span>
+                                        <span class="font-mono">$<span id="displayShipping">200</span></span>
+                                    </div>
+                                    <div class="pt-4 border-t border-white/10 flex justify-between items-end">
+                                        <span class="text-blue-400 font-bold tracking-widest uppercase text-xs">Total Amount</span>
+                                        <div class="text-4xl font-black">NT$ <span id="displayTotal">1,400</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 步驟 4 -->
+                    <section id="step4" class="bg-white rounded-[2.5rem] shadow-xl shadow-slate-200/50 border border-slate-100 overflow-hidden animate-slide-up" style="animation-delay: 0.4s">
+                        <div class="px-8 py-10">
+                            <div class="flex items-center gap-3 mb-8">
+                                <span class="bg-slate-800 text-white w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold">4</span>
+                                <h2 class="text-2xl font-black">匯款對帳與備註</h2>
+                            </div>
+
+                            <div class="flex flex-col md:flex-row gap-6 mb-8">
+                                <div class="flex-1 bg-slate-50 p-6 rounded-[2rem] border border-slate-100 flex flex-col items-center justify-center text-center">
+                                    <p class="text-[10px] font-bold text-slate-400 uppercase mb-2">銀行資訊</p>
+                                    <p class="font-bold text-slate-800">第一銀行 (007)</p>
+                                    <p class="text-2xl font-mono font-black text-blue-600">12110151787</p>
+                                    <p class="text-xs text-slate-500 mt-1">建成分行</p>
+                                </div>
+                                <div class="flex-1 space-y-2">
+                                    <label class="text-sm font-bold text-slate-500 ml-1">匯款帳號末 5 碼</label>
+                                    <input type="text" name="bank_last_5" required maxlength="5" inputmode="numeric" class="w-full px-5 py-8 rounded-[2rem] border-2 border-slate-100 text-center font-mono text-4xl tracking-widest outline-none focus:border-blue-600 focus:bg-blue-50/30 transition-all" placeholder="00000">
+                                </div>
+                            </div>
+
+                            <div class="space-y-2">
+                                <label class="text-sm font-bold text-slate-500 ml-1">備註訊息 (若有特殊需求請填寫)</label>
+                                <textarea name="note" class="w-full p-5 rounded-2xl bg-slate-50 border border-slate-200 h-32 text-base outline-none input-focus-effect" placeholder="請輸入您的訊息..."></textarea>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 提交區 (手機端吸底) -->
+                    <div class="fixed bottom-0 left-0 right-0 p-4 bg-white/90 backdrop-blur-xl border-t border-slate-200 z-40 md:relative md:bg-transparent md:border-none md:p-0 md:mt-12">
+                        <div class="max-w-2xl mx-auto md:max-w-none">
+                            <button type="submit" id="submitBtn" disabled class="group relative w-full py-5 bg-slate-300 text-white text-xl font-black rounded-2xl shadow-xl transition-all active:scale-[0.98] overflow-hidden disabled:cursor-not-allowed">
+                                <span class="relative z-10" id="btnText">請先完成郵件驗證</span>
+                                <div id="btnProgress" class="absolute inset-0 bg-blue-600 transform translate-x-[-100%] transition-transform duration-500"></div>
+                            </button>
+                            <p class="text-[10px] text-center text-slate-400 mt-3 md:hidden">點擊即代表同意萬里遊科技服務條款</p>
+                        </div>
                     </div>
                     
-                    <div class="space-y-2">
-                        <div class="flex justify-between text-slate-400 text-xs">
-                            <span>軟體安裝費用</span>
-                            <span>$1,200</span>
-                        </div>
-                        <div class="flex justify-between text-slate-400 text-xs">
-                            <span>物流運送費用</span>
-                            <span>$<span id="displayShipping">200</span></span>
-                        </div>
-                    </div>
-
-                    <div class="pt-4 flex justify-between items-end">
-                        <div class="text-slate-400 text-[10px] font-bold uppercase mb-1">Total Amount</div>
-                        <div class="text-4xl font-black text-white">NT$ <span id="displayTotal">1,400</span></div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- 步驟 4：匯款對帳 -->
-            <section class="glass-card rounded-[2rem] shadow-sm border border-slate-200 p-6 space-y-6">
-                <div class="bg-slate-100 p-5 rounded-3xl space-y-2 text-center">
-                    <p class="text-[10px] font-bold text-slate-400 uppercase">Bank Information</p>
-                    <p class="font-black text-slate-800">第一銀行 (007) 建成分行</p>
-                    <p class="text-2xl font-mono font-bold text-blue-600 tracking-tighter">12110151787</p>
-                </div>
-
-                <div class="space-y-4">
-                    <div>
-                        <label class="block text-xs font-bold text-slate-500 uppercase mb-2 ml-1">匯款帳號後 5 碼 *</label>
-                        <input type="text" name="bank_last_5" required maxlength="5" class="w-full px-4 py-4 rounded-2xl border border-slate-200 text-center font-mono text-3xl tracking-[0.3em] outline-none focus:border-blue-500" placeholder="00000">
-                    </div>
-                    <textarea name="note" class="w-full p-4 rounded-2xl border border-slate-200 h-24 text-sm outline-none" placeholder="備註紀錄..."></textarea>
-                </div>
-            </section>
-
-            <div class="fixed bottom-0 left-0 right-0 p-4 bg-white/80 backdrop-blur-md border-t border-slate-100 md:static md:bg-transparent md:border-none md:p-0">
-                <button type="submit" id="submitBtn" disabled class="w-full py-5 bg-slate-300 text-white text-lg font-black rounded-2xl shadow-lg transition-all active:scale-[0.98] disabled:cursor-not-allowed">
-                    請先完成驗證
-                </button>
-            </div>
-            
-            <input type="hidden" name="apply_date" id="hiddenDate">
-        </form>
+                    <input type="hidden" name="apply_date" id="hiddenDate">
+                </form>
+            </main>
+        </div>
     </div>
 
     <!-- 成功彈窗 -->
-    <div id="successModal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-sm hidden z-50 flex items-center justify-center p-4">
+    <div id="successModal" class="fixed inset-0 bg-slate-900/90 backdrop-blur-md hidden z-[100] flex items-center justify-center p-6">
         <div class="bg-white rounded-[3rem] p-10 max-w-sm w-full text-center shadow-2xl animate-in zoom-in duration-300">
-            <div class="w-20 h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6 text-4xl">✓</div>
-            <h3 class="text-2xl font-black text-slate-900 mb-2">已成功收件！</h3>
-            <p class="text-slate-500 text-sm mb-8 leading-relaxed">我們已寄送確認信與 LINE QR Code 到您的信箱，請留意查收。</p>
-            <button onclick="location.reload()" class="w-full bg-slate-900 text-white py-4 rounded-2xl font-black shadow-lg">好的，我知道了</button>
+            <div class="w-24 h-24 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-8 text-5xl">✓</div>
+            <h3 class="text-3xl font-black text-slate-900 mb-4">申請已送出</h3>
+            <p class="text-slate-500 leading-relaxed mb-10 text-base">感謝您的信任！我們已將明細寄送至您的信箱，專員將在 24 小時內與您聯繫。</p>
+            <button onclick="location.reload()" class="w-full bg-slate-900 text-white py-5 rounded-2xl font-black text-lg hover:bg-black transition-all shadow-xl">好的，了解</button>
         </div>
     </div>
 
     <script>
-        // 更新後的 GAS 部署網址
         const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbz0RuhkKqvn2Pvk-bNEgzkr18233hAryHNJurRDni1tSiI8p8gCpfg7P1I83uL8GUN7/exec";
-        
         let isVerified = false;
 
-        // 初始化日期
-        const today = new Date();
-        document.getElementById('hiddenDate').value = today.toISOString().split('T')[0];
+        // 初始化
+        window.onload = () => {
+            document.getElementById('hiddenDate').value = new Date().toISOString().split('T')[0];
+            updateTotal();
+            setupScrollSpy();
+        };
+
+        // ScrollSpy 與進度條
+        function setupScrollSpy() {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.step-nav');
+            const progress = document.getElementById('scrollProgress');
+
+            window.addEventListener('scroll', () => {
+                let current = '';
+                const scrollPos = window.scrollY + 200;
+
+                // 頂部進度條
+                const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const scrolled = (winScroll / height) * 100;
+                progress.style.width = scrolled + "%";
+
+                // 導覽點亮
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (scrollPos >= sectionTop) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('step-active', 'bg-white', 'border-blue-600');
+                    if (link.dataset.step === current) {
+                        link.classList.add('step-active', 'bg-white', 'border-blue-600');
+                    }
+                });
+            });
+        }
 
         function updateTotal() {
             const method = document.getElementById('shippingMethod').value;
-            let shipFee = 200;
-            if (method === "自行取件") shipFee = 0;
-            if (method === "來回件") shipFee = 400;
-
+            let shipFee = method === "自行取件" ? 0 : (method === "來回件" ? 400 : 200);
+            
             document.getElementById('displayShipping').innerText = shipFee.toLocaleString();
             document.getElementById('displayTotal').innerText = (1200 + shipFee).toLocaleString();
         }
 
         async function sendVerificationCode() {
-            const email = document.getElementById('email').value;
+            const emailInput = document.getElementById('email');
+            const email = emailInput.value;
             if (!email || !email.includes('@')) {
-                alert("請填寫正確的 Email");
+                showMessage("請輸入正確的電子郵件格式", "error");
                 return;
             }
 
             const btn = document.getElementById('sendCodeBtn');
             btn.disabled = true;
-            btn.classList.add('loading-pulse');
-            btn.innerText = "發送中...";
+            btn.innerHTML = `<span class="inline-block animate-spin mr-2">↻</span> 發送中...`;
 
             try {
+                // 此處模擬 API 呼叫，實際需配合 GAS
                 await fetch(WEB_APP_URL, {
                     method: 'POST',
                     mode: 'no-cors',
                     body: JSON.stringify({ action: "send_code", email: email })
                 });
                 document.getElementById('verifyInputArea').classList.remove('hidden');
-                document.getElementById('emailStatus').innerHTML = '<span class="text-blue-600">驗證碼已寄出！</span>';
+                showMessage("驗證碼已寄出，請查收信箱", "success");
             } catch (err) {
-                alert("網路不穩，請再試一次");
+                showMessage("服務暫時不可用，請稍後再試", "error");
             } finally {
                 btn.disabled = false;
-                btn.classList.remove('loading-pulse');
-                btn.innerText = "重發";
+                btn.innerText = "重新獲取";
             }
         }
 
         function verifyEmailCode() {
             const code = document.getElementById('verifyCode').value;
             if (code.length < 6) {
-                alert("請輸入完整驗證碼");
+                showMessage("驗證碼為 6 位數字", "error");
                 return;
             }
             
-            // 鎖定狀態
+            // 驗證成功 UI 變更
+            isVerified = true;
             document.getElementById('email').readOnly = true;
             document.getElementById('verifyInputArea').classList.add('hidden');
             document.getElementById('sendCodeBtn').classList.add('hidden');
-            document.getElementById('emailStatus').innerHTML = '<span class="text-emerald-600 font-bold">✓ 信箱驗證程序完成</span>';
+            showMessage("✓ 身份驗證成功", "success");
             
-            isVerified = true;
             const submitBtn = document.getElementById('submitBtn');
             submitBtn.disabled = false;
-            submitBtn.innerText = "提交申請單";
+            document.getElementById('btnText').innerText = "提交正式申請單";
+            document.getElementById('btnProgress').style.transform = "translateX(0)";
             submitBtn.classList.remove('bg-slate-300');
-            submitBtn.classList.add('bg-blue-600', 'shadow-blue-200');
+            submitBtn.classList.add('bg-slate-900');
+        }
+
+        function showMessage(text, type) {
+            const el = document.getElementById('emailStatus');
+            el.innerText = text;
+            el.className = `text-xs mt-3 ml-1 font-bold ${type === 'success' ? 'text-emerald-600' : 'text-rose-500'}`;
         }
 
         document.getElementById('applicationForm').addEventListener('submit', async function(e) {
@@ -244,12 +366,14 @@
             if (!isVerified) return;
 
             const btn = document.getElementById('submitBtn');
+            const btnText = document.getElementById('btnText');
             btn.disabled = true;
-            btn.innerText = "傳送中...";
-            btn.classList.add('loading-pulse');
+            btnText.innerHTML = `<span class="inline-block animate-bounce mr-2">↑</span> 正在為您傳送資料...`;
 
             const formData = new FormData(this);
             const data = Object.fromEntries(formData.entries());
+            
+            // 補充計算欄位
             data.install_fee = 1200;
             data.shipping_fee = parseInt(document.getElementById('displayShipping').innerText.replace(',', ''));
             data.total_amount = 1200 + data.shipping_fee;
@@ -263,13 +387,11 @@
                 });
                 document.getElementById('successModal').classList.remove('hidden');
             } catch (err) {
-                alert("系統忙碌中，請稍後再試。");
+                alert("提交失敗，請檢查網路連線後重試。");
                 btn.disabled = false;
-                btn.innerText = "重新提交";
+                btnText.innerText = "重新提交申請";
             }
         });
-        
-        updateTotal();
     </script>
 </body>
 </html>
