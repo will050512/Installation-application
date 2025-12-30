@@ -74,24 +74,6 @@
                         </p>
                     </header>
 
-                    <!-- 桌面端導覽 -->
-                    <nav class="hidden lg:block space-y-4">
-                        <div class="flex items-center gap-4 p-5 rounded-3xl border-2 border-white bg-white shadow-xl shadow-slate-200/50">
-                            <span class="w-10 h-10 rounded-2xl bg-blue-600 text-white flex items-center justify-center font-black">1</span>
-                            <div>
-                                <p class="text-[10px] text-slate-400 font-black uppercase">Step 01</p>
-                                <p class="font-black text-blue-600">基本資料與驗證</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-4 p-5 rounded-3xl border-2 border-transparent text-slate-400">
-                            <span class="w-10 h-10 rounded-2xl bg-slate-100 flex items-center justify-center font-black">2</span>
-                            <div>
-                                <p class="text-[10px] font-black uppercase">Step 02</p>
-                                <p class="font-bold">規格確認與設備資訊</p>
-                            </div>
-                        </div>
-                    </nav>
-
                     <div class="mt-8 p-6 bg-rose-50 rounded-[2rem] border border-rose-100 hidden lg:block relative overflow-hidden">
                         <p class="text-xs font-black text-rose-800 mb-2 flex items-center gap-2">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
@@ -123,7 +105,7 @@
                                 <div class="space-y-2">
                                     <label class="text-sm font-black text-slate-500 ml-1 flex justify-between items-center">
                                         <span>訂購人姓名 *</span>
-                                        <span class="text-[10px] text-blue-600 bg-blue-50 px-2 py-0.5 rounded-md">與原單一致</span>
+                                        <span class="text-[10px] text-blue-600 bg-blue-50 px-2 py-0.5 rounded-md">需與原訂購人一致</span>
                                     </label>
                                     <input type="text" name="name" required class="w-full px-5 py-4 rounded-2xl bg-slate-50 border border-slate-200 outline-none input-focus-effect transition-all" placeholder="請填寫完整姓名">
                                 </div>
@@ -168,7 +150,6 @@
                                 <h2 class="text-2xl font-black tracking-tight text-slate-800">規格確認與設備資訊</h2>
                             </div>
 
-                            <!-- 強制規格確認區塊 (改進手機排版防止溢位) -->
                             <div class="mb-8 p-6 bg-amber-50 rounded-[2rem] border-2 border-amber-200 shadow-sm">
                                 <div class="flex gap-4">
                                     <input type="checkbox" id="specConfirmed" class="custom-checkbox" onchange="checkRequirements()">
@@ -177,7 +158,7 @@
                                             我已與官方 LINE 客服確認過新平板規格
                                         </label>
                                         <p class="text-amber-800 text-[12px] leading-relaxed font-medium">
-                                            本人確認上述欲安裝軟體之設備已事先透過官方 LINE 獲得技術人員核可。
+                                            本人確認欲安裝軟體之設備已事先透過官方 LINE 獲得技術人員核可。
                                         </p>
                                     </div>
                                 </div>
@@ -209,7 +190,7 @@
                                     <div class="space-y-4 p-6 bg-slate-50 rounded-[2rem] border border-slate-100 shadow-inner">
                                         <div class="space-y-1">
                                             <label class="text-[10px] font-black text-rose-500 ml-1">廠牌 Brand *</label>
-                                            <input type="text" name="new_brand" required value="Samsung" class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white outline-none focus:border-slate-800 font-black shadow-sm" placeholder="如：Samsung">
+                                            <input type="text" name="new_brand" required value="Samsung" class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white outline-none focus:border-slate-800 font-black shadow-sm">
                                         </div>
                                         <div class="space-y-1">
                                             <label class="text-[10px] font-black text-rose-500 ml-1">型號 Model *</label>
@@ -229,37 +210,39 @@
                     <section id="step3" class="bg-slate-900 rounded-[2.5rem] p-8 md:p-12 shadow-2xl relative overflow-hidden text-white animate-slide-up" style="animation-delay: 0.2s">
                         <div class="absolute top-0 right-0 w-64 h-64 bg-blue-600/10 blur-[100px] rounded-full -mr-32 -mt-32"></div>
                         
-                        <div class="relative z-10 space-y-10">
+                        <div class="relative z-10 space-y-8">
                             <div class="flex items-center gap-4">
                                 <span class="bg-blue-500 text-white w-9 h-9 rounded-xl flex items-center justify-center text-lg font-black shadow-lg">3</span>
                                 <h2 class="text-2xl font-black italic">Checkout 費用結算</h2>
                             </div>
                             
-                            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+                            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
                                 <div class="space-y-6">
                                     <div class="space-y-3">
-                                        <label class="text-[11px] font-black text-slate-400 uppercase tracking-widest ml-1">寄送方式 (公司端寄回) *</label>
+                                        <label class="text-[11px] font-black text-slate-400 uppercase tracking-widest ml-1">選擇寄送方式 (公司端寄回) *</label>
                                         <select id="shippingMethod" name="shipping_method" class="w-full bg-slate-800 text-white px-5 py-4 rounded-2xl text-base font-black outline-none border border-slate-700 cursor-pointer shadow-xl appearance-none" onchange="updateTotal()">
                                             <option value="客戶來回自取">現場來回自取 ($0)</option>
                                             <option value="一般寄送" selected>單件：公司寄回 ($200)</option>
-                                            <option value="來回件">來回件：公司派取與寄回 ($400)</option>
+                                            <option value="來回件">來回件：本公司派取與寄回 ($400)</option>
                                         </select>
                                     </div>
-                                    <div class="bg-white/5 p-4 rounded-2xl border border-white/10">
-                                        <p class="text-[12px] text-blue-300 font-bold leading-relaxed flex items-start gap-2">
-                                            <span class="mt-1 flex-shrink-0 w-1.5 h-1.5 bg-blue-400 rounded-full"></span>
-                                            若選擇「公司派取」，後續將由專人聯繫取件時間。
-                                        </p>
+
+                                    <!-- 動態服務說明卡片 -->
+                                    <div id="shippingDetailCard" class="bg-white/5 p-6 rounded-3xl border border-white/10 space-y-4 animate-in fade-in duration-300">
+                                        <p class="text-blue-400 font-black text-xs uppercase tracking-widest border-b border-white/10 pb-2">物流服務詳細內容</p>
+                                        <div id="shipContent" class="space-y-4 text-sm">
+                                            <!-- 由 JS 動態填入 -->
+                                        </div>
                                     </div>
                                 </div>
 
-                                <div class="bg-white/5 rounded-[2rem] p-6 md:p-8 border border-white/10 space-y-4">
+                                <div class="bg-white/5 rounded-[2rem] p-6 md:p-8 border border-white/10 space-y-4 shadow-2xl">
                                     <div class="flex justify-between items-center text-slate-400 font-bold">
                                         <span class="text-xs uppercase">軟體安裝費</span>
                                         <span class="font-mono text-white text-base">NT$ 1,200</span>
                                     </div>
                                     <div class="flex justify-between items-center text-slate-400 font-bold">
-                                        <span class="text-xs uppercase">物流費用 (寄回)</span>
+                                        <span class="text-xs uppercase">物流費用 (運費)</span>
                                         <span class="font-mono text-white text-base">NT$ <span id="displayShipping">200</span></span>
                                     </div>
                                     <div class="pt-6 border-t border-white/10 flex justify-between items-end">
@@ -284,7 +267,6 @@
                                 <h2 class="text-2xl font-black tracking-tight text-slate-800">匯款對帳與備註</h2>
                             </div>
 
-                            <!-- 銀行資訊卡片 (移除不換行，改用響應式字級防止溢位) -->
                             <div class="bg-slate-900 rounded-[2.5rem] p-6 md:p-10 text-center space-y-5 relative overflow-hidden shadow-2xl">
                                 <p class="text-[10px] font-black text-blue-400 uppercase tracking-widest">Bank Information</p>
                                 <div class="space-y-3">
@@ -298,7 +280,7 @@
                                 <div class="space-y-3">
                                     <label class="text-sm font-black text-slate-500 ml-1">匯款帳號末 5 碼 *</label>
                                     <input type="text" name="bank_last_5" required maxlength="5" inputmode="numeric" class="w-full px-6 py-6 rounded-2xl border-2 border-slate-100 text-center font-mono text-4xl tracking-widest outline-none focus:border-blue-600 focus:bg-blue-50/30 transition-all shadow-sm" placeholder="00000">
-                                    <p class="text-[10px] text-rose-500 font-bold ml-1 italic leading-relaxed">請於匯款後填寫以利對帳</p>
+                                    <p class="text-[10px] text-rose-500 font-bold ml-1 italic leading-relaxed">請於匯款後填寫以利核對</p>
                                 </div>
                                 <div class="space-y-3">
                                     <label class="text-sm font-black text-slate-500 ml-1">備註紀錄 (特殊需求說明)</label>
@@ -367,9 +349,50 @@
         function updateTotal() {
             const method = document.getElementById('shippingMethod').value;
             let shipFee = 200;
-            if (method === "客戶來回自取") shipFee = 0;
-            if (method === "來回件") shipFee = 400;
+            let detailHtml = "";
+
+            if (method === "客戶來回自取") {
+                shipFee = 0;
+                detailHtml = `
+                    <div class="flex items-center gap-3">
+                        <span class="px-2 py-0.5 bg-blue-500/20 text-blue-300 rounded text-[10px] font-bold">客戶端</span>
+                        <p class="text-white font-medium">自行將設備送至本公司</p>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span class="px-2 py-0.5 bg-blue-500/20 text-blue-300 rounded text-[10px] font-bold">客戶端</span>
+                        <p class="text-white font-medium">完工後自行至本公司取回</p>
+                    </div>
+                    <p class="text-slate-400 text-xs mt-2 italic">※ 適合方便親自前來的客戶</p>
+                `;
+            } else if (method === "一般寄送") {
+                shipFee = 200;
+                detailHtml = `
+                    <div class="flex items-center gap-3">
+                        <span class="px-2 py-0.5 bg-blue-500/20 text-blue-300 rounded text-[10px] font-bold">客戶端</span>
+                        <p class="text-white font-medium">自行包裹並寄送至本公司</p>
+                    </div>
+                    <div class="flex items-center gap-3 border-t border-white/5 pt-2">
+                        <span class="px-2 py-0.5 bg-emerald-500/20 text-emerald-400 rounded text-[10px] font-bold">公司端</span>
+                        <p class="text-white font-medium">完工後安排物流寄還給您</p>
+                    </div>
+                    <p class="text-slate-400 text-xs mt-2 italic">※ 200 元為單趟寄還之物流費</p>
+                `;
+            } else if (method === "來回件") {
+                shipFee = 400;
+                detailHtml = `
+                    <div class="flex items-center gap-3">
+                        <span class="px-2 py-0.5 bg-emerald-500/20 text-emerald-400 rounded text-[10px] font-bold">公司端</span>
+                        <p class="text-white font-medium">派車至您的地址取件 (需自行包裝)</p>
+                    </div>
+                    <div class="flex items-center gap-3 border-t border-white/5 pt-2">
+                        <span class="px-2 py-0.5 bg-emerald-500/20 text-emerald-400 rounded text-[10px] font-bold">公司端</span>
+                        <p class="text-white font-medium">完工後再次寄還給您</p>
+                    </div>
+                    <p class="text-slate-400 text-xs mt-2 italic">※ 適合不方便出門寄件的客戶</p>
+                `;
+            }
             
+            document.getElementById('shipContent').innerHTML = detailHtml;
             document.getElementById('displayShipping').innerText = shipFee.toLocaleString();
             document.getElementById('displayTotal').innerText = (1200 + shipFee).toLocaleString();
         }
