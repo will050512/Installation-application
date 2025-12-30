@@ -10,11 +10,11 @@
         body { 
             font-family: 'Noto Sans TC', sans-serif; 
             -webkit-tap-highlight-color: transparent;
-            word-break: break-all;
+            word-break: break-word;
             background-color: #f8fafc;
         }
         
-        /* 平滑捲動與視覺層次 */
+        /* 視覺層次優化 */
         .step-active { @apply border-blue-600 text-blue-600 font-bold; }
         .input-focus-effect:focus { @apply ring-4 ring-blue-500/10 border-blue-600 shadow-sm; }
         
@@ -30,9 +30,9 @@
         }
         .animate-slide-up { animation: slideUp 0.5s ease-out forwards; }
         
-        /* 優化 Checkbox 觸控範圍 */
+        /* 自定義 Checkbox 樣式 */
         .custom-checkbox {
-            @apply w-7 h-7 rounded-lg border-2 border-amber-400 appearance-none cursor-pointer transition-all relative flex-shrink-0;
+            @apply w-7 h-7 rounded-lg border-2 border-amber-400 appearance-none cursor-pointer transition-all relative flex-shrink-0 mt-1;
         }
         .custom-checkbox:checked {
             @apply bg-amber-500 border-amber-500 shadow-md shadow-amber-200;
@@ -42,8 +42,10 @@
             @apply absolute inset-0 text-white text-lg font-black flex items-center justify-center;
         }
         
-        /* 文字選取顏色 */
-        ::selection { background: rgba(59, 130, 246, 0.2); }
+        /* 防止行動端字體過小 */
+        input, select, textarea {
+            font-size: 16px !important;
+        }
     </style>
 </head>
 <body class="mesh-gradient min-h-screen text-slate-800 antialiased">
@@ -54,50 +56,49 @@
     </div>
 
     <div class="max-w-6xl mx-auto px-4 py-8 md:py-20">
-        <div class="flex flex-col lg:flex-row gap-12 lg:gap-16">
+        <div class="flex flex-col lg:flex-row gap-10 lg:gap-16">
             
             <!-- 左側資訊欄 -->
-            <aside class="lg:w-1/3 space-y-10">
+            <aside class="lg:w-1/3 space-y-8">
                 <div class="lg:sticky lg:top-16">
-                    <header class="mb-12 animate-slide-up">
-                        <div class="inline-flex items-center bg-blue-600 text-white px-4 py-1.5 rounded-full text-xs font-black mb-6 uppercase tracking-widest shadow-lg shadow-blue-200">
+                    <header class="mb-10 animate-slide-up">
+                        <div class="inline-flex items-center bg-blue-600 text-white px-4 py-1.5 rounded-full text-[10px] font-black mb-6 uppercase tracking-widest shadow-lg shadow-blue-200">
                             Wan Li You Tech
                         </div>
                         <h1 class="text-4xl font-black text-slate-900 leading-tight md:text-6xl tracking-tighter">
                             軟體安裝<br><span class="text-blue-600">申請系統</span>
                         </h1>
-                        <p class="mt-6 text-slate-500 leading-relaxed font-medium text-base md:text-lg">
+                        <p class="mt-4 text-slate-500 leading-relaxed font-medium text-base">
                             20250429 修訂版<br>
-                            感謝您的申請，請協助填寫完整資料。
+                            專業、快速、數位化的設備安裝服務。
                         </p>
                     </header>
 
-                    <!-- 步驟導覽 -->
-                    <nav class="hidden lg:block space-y-5">
-                        <div class="flex items-center gap-5 p-5 rounded-3xl border-2 border-white bg-white shadow-xl shadow-slate-200/50">
-                            <span class="w-12 h-12 rounded-2xl bg-blue-600 text-white flex items-center justify-center font-black text-lg shadow-lg shadow-blue-100">1</span>
+                    <!-- 桌面端導覽 -->
+                    <nav class="hidden lg:block space-y-4">
+                        <div class="flex items-center gap-4 p-5 rounded-3xl border-2 border-white bg-white shadow-xl shadow-slate-200/50">
+                            <span class="w-10 h-10 rounded-2xl bg-blue-600 text-white flex items-center justify-center font-black">1</span>
                             <div>
-                                <p class="text-[10px] text-slate-400 font-black uppercase tracking-widest mb-0.5">Step 01</p>
-                                <p class="font-black text-blue-600 text-lg">基本資料與驗證</p>
+                                <p class="text-[10px] text-slate-400 font-black uppercase">Step 01</p>
+                                <p class="font-black text-blue-600">基本資料與驗證</p>
                             </div>
                         </div>
-                        <div class="flex items-center gap-5 p-5 rounded-3xl border-2 border-transparent text-slate-400">
-                            <span class="w-12 h-12 rounded-2xl bg-slate-100 flex items-center justify-center font-black text-lg">2</span>
+                        <div class="flex items-center gap-4 p-5 rounded-3xl border-2 border-transparent text-slate-400">
+                            <span class="w-10 h-10 rounded-2xl bg-slate-100 flex items-center justify-center font-black">2</span>
                             <div>
-                                <p class="text-[10px] font-black uppercase tracking-widest mb-0.5">Step 02</p>
+                                <p class="text-[10px] font-black uppercase">Step 02</p>
                                 <p class="font-bold">規格確認與設備資訊</p>
                             </div>
                         </div>
                     </nav>
 
-                    <div class="mt-12 p-8 bg-rose-50 rounded-[2.5rem] border border-rose-100 hidden lg:block relative overflow-hidden group">
-                        <div class="absolute -right-4 -top-4 w-16 h-16 bg-rose-100 rounded-full opacity-50 transition-transform group-hover:scale-150 duration-700"></div>
-                        <p class="text-sm font-black text-rose-800 mb-3 flex items-center gap-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
-                            重要免責聲明
+                    <div class="mt-8 p-6 bg-rose-50 rounded-[2rem] border border-rose-100 hidden lg:block relative overflow-hidden">
+                        <p class="text-xs font-black text-rose-800 mb-2 flex items-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
+                            重要聲明
                         </p>
-                        <p class="text-[13px] text-rose-700 leading-relaxed font-medium">
-                            本系統僅供申請紀錄使用。為保障您的權益，所有設備規格必須先經由官方 LINE 客服核可。未經核可自行寄出導致之軟體不相容問題，本公司恕不負責。
+                        <p class="text-[12px] text-rose-700 leading-relaxed font-medium">
+                            所有設備規格必須先經官方 LINE 客服核可。未經核可自行填寫導致之不相容問題，由申請人自行負責。
                         </p>
                     </div>
                 </div>
@@ -105,192 +106,169 @@
 
             <!-- 右側表單區 -->
             <main class="lg:w-2/3">
-                <form id="applicationForm" class="space-y-10 pb-36 lg:pb-16">
+                <form id="applicationForm" class="space-y-8 pb-32 lg:pb-12">
                     
                     <!-- 步驟 1：基本資料 -->
-                    <section id="step1" class="bg-white rounded-[3rem] shadow-2xl shadow-slate-200/60 border border-slate-100 overflow-hidden animate-slide-up">
-                        <div class="px-8 py-10 md:px-12 md:py-14">
-                            <div class="flex flex-col md:flex-row md:items-center justify-between mb-10 gap-4">
-                                <div class="flex items-center gap-4">
-                                    <span class="bg-blue-600 text-white w-10 h-10 rounded-xl flex items-center justify-center text-lg font-black shadow-lg shadow-blue-200">1</span>
-                                    <h2 class="text-3xl font-black tracking-tighter text-nowrap">基本資料與驗證</h2>
+                    <section id="step1" class="bg-white rounded-[2.5rem] shadow-xl shadow-slate-200/60 border border-slate-100 overflow-hidden animate-slide-up">
+                        <div class="px-6 py-8 md:px-12 md:py-12">
+                            <div class="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
+                                <div class="flex items-center gap-3">
+                                    <span class="bg-blue-600 text-white w-9 h-9 rounded-xl flex items-center justify-center text-lg font-black shadow-lg shadow-blue-200 flex-shrink-0">1</span>
+                                    <h2 class="text-2xl font-black tracking-tight">基本資料與驗證</h2>
                                 </div>
-                                <span class="text-sm text-slate-400 font-bold bg-slate-50 px-4 py-1.5 rounded-full whitespace-nowrap" id="displayDate">申請日期：2025-04-29</span>
+                                <span class="text-[11px] text-slate-400 font-bold bg-slate-50 px-3 py-1 rounded-full w-fit" id="displayDate">申請日期：2025-04-29</span>
                             </div>
                             
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
-                                <div class="space-y-3">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                                <div class="space-y-2">
                                     <label class="text-sm font-black text-slate-500 ml-1 flex justify-between items-center">
                                         <span>訂購人姓名 *</span>
-                                        <span class="text-[11px] text-blue-600 bg-blue-50 px-2.5 py-1 rounded-lg whitespace-nowrap">需與原訂購姓名相同</span>
+                                        <span class="text-[10px] text-blue-600 bg-blue-50 px-2 py-0.5 rounded-md">與原單一致</span>
                                     </label>
-                                    <input type="text" name="name" required class="w-full px-6 py-4.5 rounded-[1.25rem] bg-slate-50 border border-slate-200 outline-none input-focus-effect transition-all text-base font-medium" placeholder="請填寫完整姓名">
+                                    <input type="text" name="name" required class="w-full px-5 py-4 rounded-2xl bg-slate-50 border border-slate-200 outline-none input-focus-effect transition-all" placeholder="請填寫完整姓名">
                                 </div>
-                                <div class="space-y-3">
+                                <div class="space-y-2">
                                     <label class="text-sm font-black text-slate-500 ml-1">連絡電話 *</label>
-                                    <input type="tel" name="phone" required inputmode="tel" class="w-full px-6 py-4.5 rounded-[1.25rem] bg-slate-50 border border-slate-200 outline-none input-focus-effect transition-all text-base font-medium" placeholder="09XX-XXX-XXX">
+                                    <input type="tel" name="phone" required inputmode="tel" class="w-full px-5 py-4 rounded-2xl bg-slate-50 border border-slate-200 outline-none input-focus-effect transition-all" placeholder="09XX-XXX-XXX">
                                 </div>
                             </div>
                             
                             <!-- Email 驗證區 -->
-                            <div class="bg-blue-600 p-8 md:p-10 rounded-[2.5rem] shadow-2xl shadow-blue-200 mb-10 text-white relative overflow-hidden">
-                                <div class="absolute top-0 right-0 p-8 opacity-10 pointer-events-none">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M22 17a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9.5C2 7 4 5 6.5 5H18c2.2 0 4 1.8 4 4v8Z"/><path d="m2 9 10 7 10-7"/></svg>
+                            <div class="bg-blue-600 p-6 md:p-8 rounded-[2rem] shadow-xl shadow-blue-100 mb-8 text-white">
+                                <label class="block text-sm font-black mb-3 ml-1">電子郵件驗證 (供電子發票使用) *</label>
+                                <div class="flex flex-col sm:flex-row gap-3">
+                                    <input type="email" id="email" name="email" required placeholder="請填寫正確信箱" class="flex-grow px-5 py-4 rounded-2xl bg-white border-none outline-none text-slate-900 font-bold">
+                                    <button type="button" id="sendCodeBtn" onclick="sendVerificationCode()" class="bg-slate-900 text-white px-8 py-4 rounded-2xl font-black hover:bg-black active:scale-95 transition-all shadow-xl">
+                                        獲取驗證碼
+                                    </button>
                                 </div>
-                                <div class="relative z-10">
-                                    <label class="block text-base font-black mb-4 ml-1">電子郵件驗證 (供電子發票寄送使用) *</label>
-                                    <div class="flex flex-col sm:flex-row gap-4">
-                                        <input type="email" id="email" name="email" required placeholder="請填寫正確信箱" class="flex-grow px-6 py-4.5 rounded-2xl bg-white border-none outline-none text-slate-900 text-base font-bold placeholder:text-slate-300">
-                                        <button type="button" id="sendCodeBtn" onclick="sendVerificationCode()" class="bg-slate-900 text-white px-10 py-4.5 rounded-2xl font-black hover:bg-black active:scale-95 transition-all whitespace-nowrap shadow-xl">
-                                            獲取驗證碼
+                                <div id="verifyInputArea" class="hidden mt-4 animate-in fade-in slide-in-from-top-4">
+                                    <div class="flex flex-col sm:flex-row gap-3">
+                                        <input type="text" id="verifyCode" maxlength="6" inputmode="numeric" placeholder="6 位驗證碼" class="flex-grow px-5 py-4 rounded-2xl border-none text-slate-900 text-center font-mono text-xl tracking-[0.3em] outline-none shadow-inner">
+                                        <button type="button" onclick="verifyEmailCode()" class="bg-emerald-500 text-white px-10 py-4 rounded-2xl font-black hover:bg-emerald-600 active:scale-95 transition-all shadow-xl">
+                                            驗證
                                         </button>
                                     </div>
-                                    <div id="verifyInputArea" class="hidden mt-6 animate-in fade-in slide-in-from-top-4 duration-500">
-                                        <div class="flex flex-col sm:flex-row gap-4">
-                                            <input type="text" id="verifyCode" maxlength="6" inputmode="numeric" placeholder="請輸入 6 位驗證碼" class="flex-grow px-6 py-4.5 rounded-2xl border-none text-slate-900 text-center font-mono text-2xl tracking-[0.5em] outline-none shadow-inner">
-                                            <button type="button" onclick="verifyEmailCode()" class="bg-emerald-500 text-white px-12 py-4.5 rounded-2xl font-black hover:bg-emerald-600 active:scale-95 transition-all shadow-xl">
-                                                立即驗證
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <p id="emailStatus" class="text-sm mt-4 ml-1 font-bold min-h-[1.5rem] flex items-center gap-2"></p>
                                 </div>
+                                <p id="emailStatus" class="text-[12px] mt-3 ml-1 font-bold min-h-[1.5rem]"></p>
                             </div>
 
-                            <div class="space-y-3">
+                            <div class="space-y-2">
                                 <label class="text-sm font-black text-slate-500 ml-1">聯絡地址 *</label>
-                                <input type="text" name="address" required class="w-full px-6 py-4.5 rounded-[1.25rem] bg-slate-50 border border-slate-200 outline-none input-focus-effect transition-all text-base font-medium" placeholder="請填寫完整收件地址">
+                                <input type="text" name="address" required class="w-full px-5 py-4 rounded-2xl bg-slate-50 border border-slate-200 outline-none input-focus-effect transition-all" placeholder="請填寫完整收件地址">
                             </div>
                         </div>
                     </section>
 
-                    <!-- 步驟 2：設備資訊與規格確認 -->
-                    <section id="step2" class="bg-white rounded-[3rem] shadow-2xl shadow-slate-200/60 border border-slate-100 overflow-hidden animate-slide-up" style="animation-delay: 0.1s">
-                        <div class="px-8 py-10 md:px-12 md:py-14">
-                            <div class="flex items-center gap-4 mb-10">
-                                <span class="bg-slate-800 text-white w-10 h-10 rounded-xl flex items-center justify-center text-lg font-black shadow-lg shadow-slate-200">2</span>
-                                <h2 class="text-3xl font-black tracking-tighter text-slate-800 text-nowrap">規格確認與設備資訊</h2>
+                    <!-- 步驟 2：設備資訊 -->
+                    <section id="step2" class="bg-white rounded-[2.5rem] shadow-xl shadow-slate-200/60 border border-slate-100 overflow-hidden animate-slide-up" style="animation-delay: 0.1s">
+                        <div class="px-6 py-8 md:px-12 md:py-12">
+                            <div class="flex items-center gap-3 mb-8">
+                                <span class="bg-slate-800 text-white w-9 h-9 rounded-xl flex items-center justify-center text-lg font-black shadow-lg shadow-slate-200 flex-shrink-0">2</span>
+                                <h2 class="text-2xl font-black tracking-tight text-slate-800">規格確認與設備資訊</h2>
                             </div>
 
-                            <!-- 強制規格確認區塊 -->
-                            <div class="mb-12 p-8 bg-amber-50 rounded-[2.5rem] border-2 border-amber-200 shadow-xl shadow-amber-100/20">
-                                <div class="flex items-start gap-6">
-                                    <div class="pt-1">
-                                        <input type="checkbox" id="specConfirmed" class="custom-checkbox" onchange="checkRequirements()">
-                                    </div>
-                                    <div class="space-y-3">
-                                        <label for="specConfirmed" class="font-black text-amber-950 text-xl cursor-pointer select-none leading-tight block">
+                            <!-- 強制規格確認區塊 (改進手機排版防止溢位) -->
+                            <div class="mb-8 p-6 bg-amber-50 rounded-[2rem] border-2 border-amber-200 shadow-sm">
+                                <div class="flex gap-4">
+                                    <input type="checkbox" id="specConfirmed" class="custom-checkbox" onchange="checkRequirements()">
+                                    <div class="flex-1 space-y-2">
+                                        <label for="specConfirmed" class="font-black text-amber-950 text-base md:text-lg cursor-pointer select-none leading-snug block">
                                             我已與官方 LINE 客服確認過新平板規格
                                         </label>
-                                        <p class="text-amber-800 text-sm leading-relaxed font-medium">
-                                            本人確認上述欲安裝軟體之設備已事先透過官方 LINE 獲得技術人員核可。若因未經確認導致不相容，本人願承擔相關責任。
+                                        <p class="text-amber-800 text-[12px] leading-relaxed font-medium">
+                                            本人確認上述欲安裝軟體之設備已事先透過官方 LINE 獲得技術人員核可。
                                         </p>
                                     </div>
                                 </div>
                             </div>
                             
-                            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                                 <!-- 原平板資訊 -->
-                                <div class="space-y-5">
-                                    <div class="flex items-center gap-2 px-1">
-                                        <div class="w-1.5 h-4 bg-blue-600 rounded-full"></div>
-                                        <p class="text-sm font-black text-blue-600 uppercase tracking-widest whitespace-nowrap">原平板資訊 (原有設備)</p>
-                                    </div>
-                                    <div class="space-y-4 p-8 bg-slate-50 rounded-[2.5rem] border border-slate-100">
-                                        <div class="space-y-2">
-                                            <label class="text-[11px] font-black text-slate-400 ml-1 uppercase">廠牌 Brand</label>
-                                            <input type="text" name="old_brand" value="Samsung Galaxy Tab" readonly class="w-full px-5 py-3.5 rounded-xl bg-white border border-slate-200 text-slate-500 text-base font-black shadow-sm">
+                                <div class="space-y-4">
+                                    <p class="text-[11px] font-black text-blue-600 bg-blue-50 px-3 py-1 rounded-full inline-block uppercase tracking-wider">原平板 (原有設備)</p>
+                                    <div class="space-y-4 p-6 bg-slate-50 rounded-[2rem] border border-slate-100 shadow-inner">
+                                        <div class="space-y-1">
+                                            <label class="text-[10px] font-black text-slate-400 ml-1">廠牌 Brand</label>
+                                            <input type="text" name="old_brand" value="Samsung Galaxy Tab" readonly class="w-full px-4 py-3 rounded-xl bg-white border border-slate-200 text-slate-500 font-black shadow-sm">
                                         </div>
-                                        <div class="space-y-2">
-                                            <label class="text-[11px] font-black text-slate-400 ml-1 uppercase">型號 Model</label>
-                                            <input type="text" name="old_model" placeholder="請輸入型號" class="w-full px-5 py-3.5 rounded-xl border border-slate-200 bg-white outline-none focus:border-blue-400 text-base font-medium shadow-sm">
+                                        <div class="space-y-1">
+                                            <label class="text-[10px] font-black text-slate-400 ml-1">型號 Model</label>
+                                            <input type="text" name="old_model" placeholder="請輸入型號" class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white outline-none focus:border-blue-400 shadow-sm">
                                         </div>
-                                        <div class="space-y-2">
-                                            <label class="text-[11px] font-black text-slate-400 ml-1 uppercase">序號 S/N</label>
-                                            <input type="text" name="old_sn" placeholder="請輸入序號" class="w-full px-5 py-3.5 rounded-xl border border-slate-200 bg-white outline-none focus:border-blue-400 text-base font-mono shadow-sm">
+                                        <div class="space-y-1">
+                                            <label class="text-[10px] font-black text-slate-400 ml-1">序號 S/N</label>
+                                            <input type="text" name="old_sn" placeholder="請輸入序號" class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white outline-none focus:border-blue-400 font-mono shadow-sm">
                                         </div>
                                     </div>
                                 </div>
 
                                 <!-- 安裝設備 -->
-                                <div class="space-y-5">
-                                    <div class="flex items-center gap-2 px-1">
-                                        <div class="w-1.5 h-4 bg-slate-400 rounded-full"></div>
-                                        <p class="text-sm font-black text-slate-600 uppercase tracking-widest whitespace-nowrap">安裝設備 (欲處理設備)</p>
-                                    </div>
-                                    <div class="space-y-4 p-8 bg-slate-50 rounded-[2.5rem] border border-slate-100">
-                                        <div class="space-y-2">
-                                            <label class="text-[11px] font-black text-slate-400 ml-1 uppercase text-rose-500">廠牌 Brand *</label>
-                                            <input type="text" name="new_brand" required value="Samsung" class="w-full px-5 py-3.5 rounded-xl border border-slate-200 bg-white outline-none focus:border-slate-800 text-base font-black shadow-sm" placeholder="如：Samsung">
+                                <div class="space-y-4">
+                                    <p class="text-[11px] font-black text-slate-600 bg-slate-100 px-3 py-1 rounded-full inline-block uppercase tracking-wider">安裝設備 (新平板)</p>
+                                    <div class="space-y-4 p-6 bg-slate-50 rounded-[2rem] border border-slate-100 shadow-inner">
+                                        <div class="space-y-1">
+                                            <label class="text-[10px] font-black text-rose-500 ml-1">廠牌 Brand *</label>
+                                            <input type="text" name="new_brand" required value="Samsung" class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white outline-none focus:border-slate-800 font-black shadow-sm" placeholder="如：Samsung">
                                         </div>
-                                        <div class="space-y-2">
-                                            <label class="text-[11px] font-black text-slate-400 ml-1 uppercase text-rose-500">型號 Model *</label>
-                                            <input type="text" name="new_model" required placeholder="如：SM-X200" class="w-full px-5 py-3.5 rounded-xl border border-slate-200 bg-white outline-none focus:border-slate-800 text-base font-medium shadow-sm">
+                                        <div class="space-y-1">
+                                            <label class="text-[10px] font-black text-rose-500 ml-1">型號 Model *</label>
+                                            <input type="text" name="new_model" required placeholder="如：SM-X200" class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white outline-none focus:border-slate-800 shadow-sm">
                                         </div>
-                                        <div class="space-y-2">
-                                            <label class="text-[11px] font-black text-slate-400 ml-1 uppercase text-rose-500">序號 S/N *</label>
-                                            <input type="text" name="new_sn" required placeholder="請填寫新平板序號" class="w-full px-5 py-3.5 rounded-xl border border-slate-200 bg-white outline-none focus:border-slate-800 text-base font-mono shadow-sm">
+                                        <div class="space-y-1">
+                                            <label class="text-[10px] font-black text-rose-500 ml-1">序號 S/N *</label>
+                                            <input type="text" name="new_sn" required placeholder="請填寫序號" class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white outline-none focus:border-slate-800 font-mono shadow-sm">
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-
-                            <div class="mt-10 p-6 bg-slate-100/50 rounded-3xl border border-slate-200 flex items-start gap-4">
-                                <div class="bg-white text-slate-600 p-2.5 rounded-xl shadow-sm">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 17h4V5H2v12h3"/><path d="M20 17h2v-3.34a4 4 0 0 0-1.17-2.83L19 9h-5"/><circle cx="7.5" cy="17.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg>
-                                </div>
-                                <div class="space-y-1">
-                                    <p class="font-black text-slate-800 text-sm">自行寄送提醒</p>
-                                    <p class="text-slate-500 text-[13px] font-medium leading-relaxed">請於提交後，將平板妥善打包並寄送至本公司服務處（運費由客戶負擔）。</p>
                                 </div>
                             </div>
                         </div>
                     </section>
 
                     <!-- 步驟 3：費用結算 -->
-                    <section id="step3" class="bg-slate-900 rounded-[3.5rem] p-10 md:p-14 shadow-2xl relative overflow-hidden text-white animate-slide-up" style="animation-delay: 0.2s">
-                        <div class="absolute top-0 right-0 w-80 h-80 bg-blue-600/10 blur-[120px] rounded-full -mr-40 -mt-40"></div>
+                    <section id="step3" class="bg-slate-900 rounded-[2.5rem] p-8 md:p-12 shadow-2xl relative overflow-hidden text-white animate-slide-up" style="animation-delay: 0.2s">
+                        <div class="absolute top-0 right-0 w-64 h-64 bg-blue-600/10 blur-[100px] rounded-full -mr-32 -mt-32"></div>
                         
-                        <div class="relative z-10">
-                            <div class="flex items-center gap-4 mb-12">
-                                <span class="bg-blue-500 text-white w-10 h-10 rounded-xl flex items-center justify-center text-lg font-black shadow-lg shadow-blue-500/20">3</span>
-                                <h2 class="text-3xl font-black italic tracking-tight text-nowrap">Checkout 費用結算</h2>
+                        <div class="relative z-10 space-y-10">
+                            <div class="flex items-center gap-4">
+                                <span class="bg-blue-500 text-white w-9 h-9 rounded-xl flex items-center justify-center text-lg font-black shadow-lg">3</span>
+                                <h2 class="text-2xl font-black italic">Checkout 費用結算</h2>
                             </div>
                             
-                            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                                <div class="space-y-8">
+                            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+                                <div class="space-y-6">
                                     <div class="space-y-3">
-                                        <label class="text-sm font-black text-slate-400 uppercase tracking-widest ml-1">寄送方式 (本公司安裝完寄回) *</label>
-                                        <select id="shippingMethod" name="shipping_method" class="w-full bg-slate-800 text-white px-6 py-5 rounded-2xl text-lg font-black outline-none border border-slate-700 cursor-pointer hover:bg-slate-700 transition-all appearance-none shadow-xl" onchange="updateTotal()">
+                                        <label class="text-[11px] font-black text-slate-400 uppercase tracking-widest ml-1">寄送方式 (公司端寄回) *</label>
+                                        <select id="shippingMethod" name="shipping_method" class="w-full bg-slate-800 text-white px-5 py-4 rounded-2xl text-base font-black outline-none border border-slate-700 cursor-pointer shadow-xl appearance-none" onchange="updateTotal()">
                                             <option value="客戶來回自取">現場來回自取 ($0)</option>
-                                            <option value="一般寄送" selected>單件：本公司寄回 ($200)</option>
-                                            <option value="來回件">來回件：本公司派取與寄回 ($400)</option>
+                                            <option value="一般寄送" selected>單件：公司寄回 ($200)</option>
+                                            <option value="來回件">來回件：公司派取與寄回 ($400)</option>
                                         </select>
                                     </div>
-                                    <div class="flex items-start gap-3 px-1">
-                                        <span class="text-blue-400 mt-0.5">•</span>
-                                        <p class="text-[13px] text-blue-300 font-bold leading-relaxed">
+                                    <div class="bg-white/5 p-4 rounded-2xl border border-white/10">
+                                        <p class="text-[12px] text-blue-300 font-bold leading-relaxed flex items-start gap-2">
+                                            <span class="mt-1 flex-shrink-0 w-1.5 h-1.5 bg-blue-400 rounded-full"></span>
                                             若選擇「公司派取」，後續將由專人聯繫取件時間。
                                         </p>
                                     </div>
                                 </div>
 
-                                <div class="bg-white/5 rounded-[3rem] p-10 border border-white/10 space-y-6 shadow-2xl">
+                                <div class="bg-white/5 rounded-[2rem] p-6 md:p-8 border border-white/10 space-y-4">
                                     <div class="flex justify-between items-center text-slate-400 font-bold">
-                                        <span class="text-sm uppercase whitespace-nowrap">軟體安裝費</span>
-                                        <span class="font-mono text-white text-lg whitespace-nowrap">NT$ 1,200</span>
+                                        <span class="text-xs uppercase">軟體安裝費</span>
+                                        <span class="font-mono text-white text-base">NT$ 1,200</span>
                                     </div>
                                     <div class="flex justify-between items-center text-slate-400 font-bold">
-                                        <span class="text-sm uppercase whitespace-nowrap">物流費用 (寄回)</span>
-                                        <span class="font-mono text-white text-lg whitespace-nowrap">NT$ <span id="displayShipping">200</span></span>
+                                        <span class="text-xs uppercase">物流費用 (寄回)</span>
+                                        <span class="font-mono text-white text-base">NT$ <span id="displayShipping">200</span></span>
                                     </div>
-                                    <div class="pt-8 border-t border-white/10 flex justify-between items-end">
+                                    <div class="pt-6 border-t border-white/10 flex justify-between items-end">
                                         <div class="space-y-1">
-                                            <span class="text-blue-400 font-black text-[10px] uppercase tracking-[0.3em] block whitespace-nowrap">Total Amount</span>
-                                            <span class="text-slate-300 text-xs font-bold uppercase whitespace-nowrap">應付總額</span>
+                                            <span class="text-blue-400 font-black text-[10px] uppercase tracking-wider block">Total Amount</span>
+                                            <span class="text-slate-300 text-xs font-bold uppercase">應付總額</span>
                                         </div>
-                                        <div class="text-4xl sm:text-5xl font-black text-white tracking-tighter italic whitespace-nowrap">
-                                            <span class="text-2xl mr-1 not-italic">NT$</span><span id="displayTotal">1,400</span>
+                                        <div class="text-3xl sm:text-4xl md:text-5xl font-black text-white tracking-tighter italic">
+                                            <span class="text-xl mr-1 not-italic">NT$</span><span id="displayTotal">1,400</span>
                                         </div>
                                     </div>
                                 </div>
@@ -299,56 +277,48 @@
                     </section>
 
                     <!-- 步驟 4：匯款對帳 -->
-                    <section id="step4" class="bg-white rounded-[3rem] shadow-2xl shadow-slate-200/60 border border-slate-100 overflow-hidden animate-slide-up" style="animation-delay: 0.3s">
-                        <div class="px-8 py-10 md:px-12 md:py-14 space-y-10">
-                            <div class="flex items-center gap-4">
-                                <span class="bg-slate-800 text-white w-10 h-10 rounded-xl flex items-center justify-center text-lg font-black shadow-lg shadow-slate-200">4</span>
-                                <h2 class="text-3xl font-black tracking-tighter text-slate-800 text-nowrap">匯款對帳與備註</h2>
+                    <section id="step4" class="bg-white rounded-[2.5rem] shadow-xl shadow-slate-200/60 border border-slate-100 overflow-hidden animate-slide-up" style="animation-delay: 0.3s">
+                        <div class="px-6 py-8 md:px-12 md:py-12 space-y-8">
+                            <div class="flex items-center gap-3">
+                                <span class="bg-slate-800 text-white w-9 h-9 rounded-xl flex items-center justify-center text-lg font-black shadow-lg flex-shrink-0">4</span>
+                                <h2 class="text-2xl font-black tracking-tight text-slate-800">匯款對帳與備註</h2>
                             </div>
 
-                            <!-- 銀行資訊卡片 -->
-                            <div class="bg-slate-900 rounded-[3rem] p-8 md:p-10 text-center space-y-5 relative overflow-hidden group shadow-2xl">
-                                <div class="absolute inset-0 bg-blue-600 opacity-0 group-hover:opacity-5 transition-opacity duration-700"></div>
-                                <p class="text-[11px] font-black text-blue-400 uppercase tracking-[0.4em]">Bank Transfer Information</p>
-                                <div class="space-y-2">
-                                    <p class="text-white font-black text-xl md:text-2xl tracking-tight whitespace-nowrap overflow-hidden text-ellipsis">第一銀行 (007) 建成分行</p>
-                                    <p class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-mono font-black text-blue-500 tracking-tighter whitespace-nowrap">12110151787</p>
-                                    <p class="text-slate-400 text-sm md:text-base font-bold whitespace-nowrap overflow-hidden text-ellipsis">戶名：萬里遊科技股份有限公司</p>
+                            <!-- 銀行資訊卡片 (移除不換行，改用響應式字級防止溢位) -->
+                            <div class="bg-slate-900 rounded-[2.5rem] p-6 md:p-10 text-center space-y-5 relative overflow-hidden shadow-2xl">
+                                <p class="text-[10px] font-black text-blue-400 uppercase tracking-widest">Bank Information</p>
+                                <div class="space-y-3">
+                                    <p class="text-white font-black text-lg sm:text-xl">第一銀行 (007) 建成分行</p>
+                                    <p class="text-3xl sm:text-4xl md:text-5xl font-mono font-black text-blue-500 tracking-tighter break-all">12110151787</p>
+                                    <p class="text-slate-400 text-sm font-bold leading-snug">戶名：萬里遊科技股份有限公司</p>
                                 </div>
                             </div>
 
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
-                                <div class="space-y-4">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+                                <div class="space-y-3">
                                     <label class="text-sm font-black text-slate-500 ml-1">匯款帳號末 5 碼 *</label>
-                                    <input type="text" name="bank_last_5" required maxlength="5" inputmode="numeric" class="w-full px-6 py-8 rounded-[2rem] border-2 border-slate-100 text-center font-mono text-5xl tracking-[0.4em] outline-none focus:border-blue-600 focus:bg-blue-50/30 transition-all shadow-sm" placeholder="00000">
-                                    <div class="flex items-center gap-2 text-rose-500 ml-1">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg>
-                                        <p class="text-[11px] font-black italic whitespace-nowrap">請於匯款後填寫以利對帳作業</p>
-                                    </div>
+                                    <input type="text" name="bank_last_5" required maxlength="5" inputmode="numeric" class="w-full px-6 py-6 rounded-2xl border-2 border-slate-100 text-center font-mono text-4xl tracking-widest outline-none focus:border-blue-600 focus:bg-blue-50/30 transition-all shadow-sm" placeholder="00000">
+                                    <p class="text-[10px] text-rose-500 font-bold ml-1 italic leading-relaxed">請於匯款後填寫以利對帳</p>
                                 </div>
-                                <div class="space-y-4">
-                                    <label class="text-sm font-black text-slate-500 ml-1">備註紀錄 (特殊需求或項目變動說明)</label>
-                                    <textarea name="note" class="w-full p-6 rounded-[2rem] bg-slate-50 border border-slate-200 h-44 text-base font-medium outline-none input-focus-effect resize-none shadow-sm" placeholder="如果有其他需求請填寫於此..."></textarea>
+                                <div class="space-y-3">
+                                    <label class="text-sm font-black text-slate-500 ml-1">備註紀錄 (特殊需求說明)</label>
+                                    <textarea name="note" class="w-full p-5 rounded-2xl bg-slate-50 border border-slate-200 h-36 text-base font-medium outline-none input-focus-effect resize-none shadow-sm" placeholder="如有其他需求請填寫..."></textarea>
                                 </div>
                             </div>
 
-                            <div class="pt-10 border-t border-slate-100">
-                                <div class="bg-rose-50/50 p-6 rounded-3xl border border-rose-100">
-                                    <p class="text-[13px] font-black text-rose-600 leading-relaxed text-center italic">
-                                        ※ 溫馨提示：本公司將於確認收到「完整款項」、「規格核可」及「待安裝設備」後，<br class="hidden md:block">正式進入軟體安裝作業程序，感謝您的配合！
-                                    </p>
-                                </div>
+                            <div class="pt-6 border-t border-slate-100">
+                                <p class="text-[12px] font-bold text-rose-500 leading-relaxed text-center italic">
+                                    ※ 溫馨提示：本公司將於確認收到「完整款項」、「規格核可」及「待安裝設備」後正式進入作業程序，感謝配合！
+                                </p>
                             </div>
                         </div>
                     </section>
 
                     <!-- 提交區 -->
-                    <div class="fixed bottom-0 left-0 right-0 p-5 bg-white/80 backdrop-blur-2xl border-t border-slate-200/50 z-40 md:relative md:bg-transparent md:border-none md:p-0 md:mt-16">
+                    <div class="fixed bottom-0 left-0 right-0 p-4 bg-white/80 backdrop-blur-xl border-t border-slate-200/50 z-40 md:relative md:bg-transparent md:border-none md:p-0 md:mt-12">
                         <div class="max-w-2xl mx-auto md:max-w-none">
-                            <button type="submit" id="submitBtn" disabled class="group relative w-full py-6 bg-slate-300 text-white text-2xl font-black rounded-3xl shadow-2xl transition-all active:scale-[0.97] overflow-hidden disabled:cursor-not-allowed">
-                                <span class="relative z-10 flex items-center justify-center gap-3" id="btnText">
-                                    請完成上述驗證項目
-                                </span>
+                            <button type="submit" id="submitBtn" disabled class="group relative w-full py-5 bg-slate-300 text-white text-xl font-black rounded-3xl shadow-2xl transition-all active:scale-[0.97] overflow-hidden disabled:cursor-not-allowed">
+                                <span class="relative z-10" id="btnText">請完成驗證項目</span>
                                 <div id="btnProgress" class="absolute inset-0 bg-blue-600 transform translate-x-[-100%] transition-transform duration-700 ease-in-out"></div>
                             </button>
                         </div>
@@ -361,21 +331,13 @@
     </div>
 
     <!-- 成功彈窗 -->
-    <div id="successModal" class="fixed inset-0 bg-slate-900/95 backdrop-blur-xl hidden z-[100] flex items-center justify-center p-6">
-        <div class="bg-white rounded-[4rem] p-12 max-w-sm w-full text-center shadow-[0_0_100px_rgba(59,130,246,0.3)] animate-in zoom-in duration-500">
-            <div class="w-28 h-28 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-10 text-6xl font-black italic shadow-inner">
-                ✓
-            </div>
-            <h3 class="text-4xl font-black text-slate-900 mb-6 tracking-tighter">申請單已送出</h3>
-            <p class="text-blue-600 leading-relaxed mb-6 text-lg font-black underline underline-offset-8 decoration-4 whitespace-nowrap">
-                請記得將平板設備寄出
-            </p>
-            <p class="text-slate-400 leading-relaxed mb-12 text-sm font-medium">
-                我們已寄送確認明細至您的信箱，<br>專員將在核對匯款後儘速聯繫。
-            </p>
-            <button onclick="location.reload()" class="w-full bg-slate-900 text-white py-5 rounded-[2rem] font-black text-xl hover:bg-black transition-all shadow-2xl shadow-slate-300">
-                完成填寫
-            </button>
+    <div id="successModal" class="fixed inset-0 bg-slate-900/95 backdrop-blur-md hidden z-[100] flex items-center justify-center p-6">
+        <div class="bg-white rounded-[3rem] p-10 max-w-sm w-full text-center shadow-2xl animate-in zoom-in duration-500">
+            <div class="w-24 h-24 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-8 text-5xl font-black shadow-inner">✓</div>
+            <h3 class="text-3xl font-black text-slate-900 mb-4 tracking-tight">申請單已送出</h3>
+            <p class="text-blue-600 leading-relaxed mb-6 text-lg font-black underline underline-offset-8">請記得寄送平板設備</p>
+            <p class="text-slate-400 leading-relaxed mb-10 text-sm font-medium">確認明細已寄至您的信箱，<br>核對款項後將儘速聯繫。</p>
+            <button onclick="location.reload()" class="w-full bg-slate-900 text-white py-5 rounded-2xl font-black text-lg hover:bg-black transition-all">完成填寫</button>
         </div>
     </div>
 
@@ -397,7 +359,8 @@
                 const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
                 const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
                 const scrolled = (winScroll / height) * 100;
-                document.getElementById("scrollProgress").style.width = scrolled + "%";
+                const progress = document.getElementById("scrollProgress");
+                if (progress) progress.style.width = scrolled + "%";
             };
         }
 
@@ -418,18 +381,14 @@
 
             if (isEmailVerified && specConfirmed) {
                 submitBtn.disabled = false;
-                btnText.innerText = "確認無誤，正式提交";
+                btnText.innerText = "正式提交申請單";
                 document.getElementById('btnProgress').style.transform = "translateX(0)";
-                submitBtn.classList.remove('bg-slate-300');
-                submitBtn.classList.add('bg-slate-900');
+                submitBtn.classList.replace('bg-slate-300', 'bg-slate-900');
             } else {
                 submitBtn.disabled = true;
-                submitBtn.classList.add('bg-slate-300');
-                submitBtn.classList.remove('bg-slate-900');
+                submitBtn.classList.replace('bg-slate-900', 'bg-slate-300');
                 document.getElementById('btnProgress').style.transform = "translateX(-100%)";
-                
-                if (!isEmailVerified) btnText.innerText = "請完成信箱驗證";
-                else if (!specConfirmed) btnText.innerText = "請確認規格核可勾選";
+                btnText.innerText = !isEmailVerified ? "請完成信箱驗證" : "請勾選規格確認項目";
             }
         }
 
@@ -437,13 +396,13 @@
             const emailInput = document.getElementById('email');
             const email = emailInput.value;
             if (!email || !email.includes('@')) {
-                showMessage("請填寫正確的電子信箱", "error");
+                showMessage("請填寫正確的信箱格式", "error");
                 return;
             }
 
             const btn = document.getElementById('sendCodeBtn');
             btn.disabled = true;
-            btn.innerHTML = `<span class="inline-block animate-spin mr-2">◌</span>發送中`;
+            btn.innerHTML = `<span class="animate-spin inline-block">◌</span> 發送中`;
 
             try {
                 await fetch(WEB_APP_URL, {
@@ -452,9 +411,9 @@
                     body: JSON.stringify({ action: "send_code", email: email })
                 });
                 document.getElementById('verifyInputArea').classList.remove('hidden');
-                showMessage("驗證碼已寄出，請查收信箱", "success");
+                showMessage("驗證碼已寄出至信箱", "success");
             } catch (err) {
-                showMessage("系統忙碌中，請稍後重試", "error");
+                showMessage("暫時無法連線，請稍後重試", "error");
             } finally {
                 btn.disabled = false;
                 btn.innerText = "重新發送";
@@ -464,7 +423,7 @@
         function verifyEmailCode() {
             const code = document.getElementById('verifyCode').value;
             if (code.length < 6) {
-                showMessage("請輸入完整 6 位數碼", "error");
+                showMessage("請輸入 6 位數碼", "error");
                 return;
             }
             
@@ -472,7 +431,7 @@
             document.getElementById('email').readOnly = true;
             document.getElementById('verifyInputArea').classList.add('hidden');
             document.getElementById('sendCodeBtn').classList.add('hidden');
-            showMessage("✓ 電子郵件身分驗證成功", "success");
+            showMessage("✓ 電子郵件驗證成功", "success");
             
             checkRequirements();
         }
@@ -480,7 +439,7 @@
         function showMessage(text, type) {
             const el = document.getElementById('emailStatus');
             el.innerText = text;
-            el.className = `text-sm mt-4 ml-1 font-black flex items-center gap-2 ${type === 'success' ? 'text-emerald-300' : 'text-rose-200 animate-pulse'}`;
+            el.className = `text-[12px] mt-3 ml-1 font-black ${type === 'success' ? 'text-emerald-300' : 'text-rose-200'}`;
         }
 
         document.getElementById('applicationForm').addEventListener('submit', async function(e) {
@@ -490,7 +449,7 @@
             const btn = document.getElementById('submitBtn');
             const btnText = document.getElementById('btnText');
             btn.disabled = true;
-            btnText.innerHTML = `<span class="inline-block animate-bounce mr-3">↑</span>正在傳送資料`;
+            btnText.innerHTML = `<span class="animate-bounce inline-block">↑</span> 資料傳送中...`;
 
             const formData = new FormData(this);
             const data = Object.fromEntries(formData.entries());
@@ -508,9 +467,9 @@
                 });
                 document.getElementById('successModal').classList.remove('hidden');
             } catch (err) {
-                alert("伺服器回應異常，請檢查網路連線。");
+                alert("網路異常，請稍後重新提交。");
                 btn.disabled = false;
-                btnText.innerText = "重新提交申請單";
+                btnText.innerText = "重新提交";
             }
         });
     </script>
