@@ -48,7 +48,7 @@
 </head>
 <body class="mesh-gradient min-h-screen text-slate-800 antialiased">
 
-    <!-- 手機版進度條 (更粗、更顯眼) -->
+    <!-- 手機版進度條 -->
     <div class="fixed top-0 left-0 w-full h-1.5 z-50 bg-slate-200/50 md:hidden">
         <div id="scrollProgress" class="h-full bg-blue-600 w-0 transition-all duration-300 ease-out"></div>
     </div>
@@ -72,7 +72,7 @@
                         </p>
                     </header>
 
-                    <!-- 步驟導覽 (更清晰的狀態感) -->
+                    <!-- 步驟導覽 -->
                     <nav class="hidden lg:block space-y-5">
                         <div class="flex items-center gap-5 p-5 rounded-3xl border-2 border-white bg-white shadow-xl shadow-slate-200/50">
                             <span class="w-12 h-12 rounded-2xl bg-blue-600 text-white flex items-center justify-center font-black text-lg shadow-lg shadow-blue-100">1</span>
@@ -113,16 +113,16 @@
                             <div class="flex flex-col md:flex-row md:items-center justify-between mb-10 gap-4">
                                 <div class="flex items-center gap-4">
                                     <span class="bg-blue-600 text-white w-10 h-10 rounded-xl flex items-center justify-center text-lg font-black shadow-lg shadow-blue-200">1</span>
-                                    <h2 class="text-3xl font-black tracking-tighter">基本資料與驗證</h2>
+                                    <h2 class="text-3xl font-black tracking-tighter text-nowrap">基本資料與驗證</h2>
                                 </div>
-                                <span class="text-sm text-slate-400 font-bold bg-slate-50 px-4 py-1.5 rounded-full" id="displayDate">申請日期：2025-04-29</span>
+                                <span class="text-sm text-slate-400 font-bold bg-slate-50 px-4 py-1.5 rounded-full whitespace-nowrap" id="displayDate">申請日期：2025-04-29</span>
                             </div>
                             
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
                                 <div class="space-y-3">
                                     <label class="text-sm font-black text-slate-500 ml-1 flex justify-between items-center">
                                         <span>訂購人姓名 *</span>
-                                        <span class="text-[11px] text-blue-600 bg-blue-50 px-2.5 py-1 rounded-lg">需與原訂購姓名相同</span>
+                                        <span class="text-[11px] text-blue-600 bg-blue-50 px-2.5 py-1 rounded-lg whitespace-nowrap">需與原訂購姓名相同</span>
                                     </label>
                                     <input type="text" name="name" required class="w-full px-6 py-4.5 rounded-[1.25rem] bg-slate-50 border border-slate-200 outline-none input-focus-effect transition-all text-base font-medium" placeholder="請填寫完整姓名">
                                 </div>
@@ -132,7 +132,7 @@
                                 </div>
                             </div>
                             
-                            <!-- Email 驗證區：加強視覺引導 -->
+                            <!-- Email 驗證區 -->
                             <div class="bg-blue-600 p-8 md:p-10 rounded-[2.5rem] shadow-2xl shadow-blue-200 mb-10 text-white relative overflow-hidden">
                                 <div class="absolute top-0 right-0 p-8 opacity-10 pointer-events-none">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M22 17a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9.5C2 7 4 5 6.5 5H18c2.2 0 4 1.8 4 4v8Z"/><path d="m2 9 10 7 10-7"/></svg>
@@ -169,10 +169,10 @@
                         <div class="px-8 py-10 md:px-12 md:py-14">
                             <div class="flex items-center gap-4 mb-10">
                                 <span class="bg-slate-800 text-white w-10 h-10 rounded-xl flex items-center justify-center text-lg font-black shadow-lg shadow-slate-200">2</span>
-                                <h2 class="text-3xl font-black tracking-tighter text-slate-800">規格確認與設備資訊</h2>
+                                <h2 class="text-3xl font-black tracking-tighter text-slate-800 text-nowrap">規格確認與設備資訊</h2>
                             </div>
 
-                            <!-- 強制規格確認區塊 (視覺最優化) -->
+                            <!-- 強制規格確認區塊 -->
                             <div class="mb-12 p-8 bg-amber-50 rounded-[2.5rem] border-2 border-amber-200 shadow-xl shadow-amber-100/20">
                                 <div class="flex items-start gap-6">
                                     <div class="pt-1">
@@ -194,7 +194,7 @@
                                 <div class="space-y-5">
                                     <div class="flex items-center gap-2 px-1">
                                         <div class="w-1.5 h-4 bg-blue-600 rounded-full"></div>
-                                        <p class="text-sm font-black text-blue-600 uppercase tracking-widest">原平板資訊 (原有設備)</p>
+                                        <p class="text-sm font-black text-blue-600 uppercase tracking-widest whitespace-nowrap">原平板資訊 (原有設備)</p>
                                     </div>
                                     <div class="space-y-4 p-8 bg-slate-50 rounded-[2.5rem] border border-slate-100">
                                         <div class="space-y-2">
@@ -216,12 +216,12 @@
                                 <div class="space-y-5">
                                     <div class="flex items-center gap-2 px-1">
                                         <div class="w-1.5 h-4 bg-slate-400 rounded-full"></div>
-                                        <p class="text-sm font-black text-slate-600 uppercase tracking-widest">安裝設備 (欲處理設備)</p>
+                                        <p class="text-sm font-black text-slate-600 uppercase tracking-widest whitespace-nowrap">安裝設備 (欲處理設備)</p>
                                     </div>
                                     <div class="space-y-4 p-8 bg-slate-50 rounded-[2.5rem] border border-slate-100">
                                         <div class="space-y-2">
                                             <label class="text-[11px] font-black text-slate-400 ml-1 uppercase text-rose-500">廠牌 Brand *</label>
-                                            <input type="text" name="new_brand" required placeholder="如：Samsung" class="w-full px-5 py-3.5 rounded-xl border border-slate-200 bg-white outline-none focus:border-slate-800 text-base font-black shadow-sm">
+                                            <input type="text" name="new_brand" required value="Samsung" class="w-full px-5 py-3.5 rounded-xl border border-slate-200 bg-white outline-none focus:border-slate-800 text-base font-black shadow-sm" placeholder="如：Samsung">
                                         </div>
                                         <div class="space-y-2">
                                             <label class="text-[11px] font-black text-slate-400 ml-1 uppercase text-rose-500">型號 Model *</label>
@@ -254,7 +254,7 @@
                         <div class="relative z-10">
                             <div class="flex items-center gap-4 mb-12">
                                 <span class="bg-blue-500 text-white w-10 h-10 rounded-xl flex items-center justify-center text-lg font-black shadow-lg shadow-blue-500/20">3</span>
-                                <h2 class="text-3xl font-black italic tracking-tight">Checkout 費用結算</h2>
+                                <h2 class="text-3xl font-black italic tracking-tight text-nowrap">Checkout 費用結算</h2>
                             </div>
                             
                             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -262,7 +262,7 @@
                                     <div class="space-y-3">
                                         <label class="text-sm font-black text-slate-400 uppercase tracking-widest ml-1">寄送方式 (本公司安裝完寄回) *</label>
                                         <select id="shippingMethod" name="shipping_method" class="w-full bg-slate-800 text-white px-6 py-5 rounded-2xl text-lg font-black outline-none border border-slate-700 cursor-pointer hover:bg-slate-700 transition-all appearance-none shadow-xl" onchange="updateTotal()">
-                                            <option value="客戶自取">客戶自取 ($0)</option>
+                                            <option value="客戶來回自取">現場來回自取 ($0)</option>
                                             <option value="一般寄送" selected>單件：本公司寄回 ($200)</option>
                                             <option value="來回件">來回件：本公司派取與寄回 ($400)</option>
                                         </select>
@@ -277,19 +277,19 @@
 
                                 <div class="bg-white/5 rounded-[3rem] p-10 border border-white/10 space-y-6 shadow-2xl">
                                     <div class="flex justify-between items-center text-slate-400 font-bold">
-                                        <span class="text-sm uppercase">軟體安裝費</span>
-                                        <span class="font-mono text-white text-lg">NT$ 1,200</span>
+                                        <span class="text-sm uppercase whitespace-nowrap">軟體安裝費</span>
+                                        <span class="font-mono text-white text-lg whitespace-nowrap">NT$ 1,200</span>
                                     </div>
                                     <div class="flex justify-between items-center text-slate-400 font-bold">
-                                        <span class="text-sm uppercase">物流費用 (寄回)</span>
-                                        <span class="font-mono text-white text-lg">NT$ <span id="displayShipping">200</span></span>
+                                        <span class="text-sm uppercase whitespace-nowrap">物流費用 (寄回)</span>
+                                        <span class="font-mono text-white text-lg whitespace-nowrap">NT$ <span id="displayShipping">200</span></span>
                                     </div>
                                     <div class="pt-8 border-t border-white/10 flex justify-between items-end">
                                         <div class="space-y-1">
-                                            <span class="text-blue-400 font-black text-[10px] uppercase tracking-[0.3em] block">Total Amount</span>
-                                            <span class="text-slate-300 text-xs font-bold uppercase">應付總額</span>
+                                            <span class="text-blue-400 font-black text-[10px] uppercase tracking-[0.3em] block whitespace-nowrap">Total Amount</span>
+                                            <span class="text-slate-300 text-xs font-bold uppercase whitespace-nowrap">應付總額</span>
                                         </div>
-                                        <div class="text-5xl font-black text-white tracking-tighter italic">
+                                        <div class="text-4xl sm:text-5xl font-black text-white tracking-tighter italic whitespace-nowrap">
                                             <span class="text-2xl mr-1 not-italic">NT$</span><span id="displayTotal">1,400</span>
                                         </div>
                                     </div>
@@ -303,17 +303,17 @@
                         <div class="px-8 py-10 md:px-12 md:py-14 space-y-10">
                             <div class="flex items-center gap-4">
                                 <span class="bg-slate-800 text-white w-10 h-10 rounded-xl flex items-center justify-center text-lg font-black shadow-lg shadow-slate-200">4</span>
-                                <h2 class="text-3xl font-black tracking-tighter text-slate-800">匯款對帳與備註</h2>
+                                <h2 class="text-3xl font-black tracking-tighter text-slate-800 text-nowrap">匯款對帳與備註</h2>
                             </div>
 
                             <!-- 銀行資訊卡片 -->
-                            <div class="bg-slate-900 rounded-[3rem] p-10 text-center space-y-5 relative overflow-hidden group shadow-2xl">
+                            <div class="bg-slate-900 rounded-[3rem] p-8 md:p-10 text-center space-y-5 relative overflow-hidden group shadow-2xl">
                                 <div class="absolute inset-0 bg-blue-600 opacity-0 group-hover:opacity-5 transition-opacity duration-700"></div>
                                 <p class="text-[11px] font-black text-blue-400 uppercase tracking-[0.4em]">Bank Transfer Information</p>
                                 <div class="space-y-2">
-                                    <p class="text-white font-black text-2xl tracking-tight">第一銀行 (007) 建成分行</p>
-                                    <p class="text-5xl font-mono font-black text-blue-500 tracking-tighter md:text-6xl">12110151787</p>
-                                    <p class="text-slate-400 text-base font-bold">戶名：萬里遊科技股份有限公司</p>
+                                    <p class="text-white font-black text-xl md:text-2xl tracking-tight whitespace-nowrap overflow-hidden text-ellipsis">第一銀行 (007) 建成分行</p>
+                                    <p class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-mono font-black text-blue-500 tracking-tighter whitespace-nowrap">12110151787</p>
+                                    <p class="text-slate-400 text-sm md:text-base font-bold whitespace-nowrap overflow-hidden text-ellipsis">戶名：萬里遊科技股份有限公司</p>
                                 </div>
                             </div>
 
@@ -323,7 +323,7 @@
                                     <input type="text" name="bank_last_5" required maxlength="5" inputmode="numeric" class="w-full px-6 py-8 rounded-[2rem] border-2 border-slate-100 text-center font-mono text-5xl tracking-[0.4em] outline-none focus:border-blue-600 focus:bg-blue-50/30 transition-all shadow-sm" placeholder="00000">
                                     <div class="flex items-center gap-2 text-rose-500 ml-1">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg>
-                                        <p class="text-[11px] font-black italic">請於匯款後填寫以利對帳作業</p>
+                                        <p class="text-[11px] font-black italic whitespace-nowrap">請於匯款後填寫以利對帳作業</p>
                                     </div>
                                 </div>
                                 <div class="space-y-4">
@@ -342,7 +342,7 @@
                         </div>
                     </section>
 
-                    <!-- 提交區 (手機吸底優化：增加毛玻璃與內距) -->
+                    <!-- 提交區 -->
                     <div class="fixed bottom-0 left-0 right-0 p-5 bg-white/80 backdrop-blur-2xl border-t border-slate-200/50 z-40 md:relative md:bg-transparent md:border-none md:p-0 md:mt-16">
                         <div class="max-w-2xl mx-auto md:max-w-none">
                             <button type="submit" id="submitBtn" disabled class="group relative w-full py-6 bg-slate-300 text-white text-2xl font-black rounded-3xl shadow-2xl transition-all active:scale-[0.97] overflow-hidden disabled:cursor-not-allowed">
@@ -360,14 +360,14 @@
         </div>
     </div>
 
-    <!-- 成功彈窗 (質感大幅提升) -->
+    <!-- 成功彈窗 -->
     <div id="successModal" class="fixed inset-0 bg-slate-900/95 backdrop-blur-xl hidden z-[100] flex items-center justify-center p-6">
         <div class="bg-white rounded-[4rem] p-12 max-w-sm w-full text-center shadow-[0_0_100px_rgba(59,130,246,0.3)] animate-in zoom-in duration-500">
             <div class="w-28 h-28 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-10 text-6xl font-black italic shadow-inner">
                 ✓
             </div>
             <h3 class="text-4xl font-black text-slate-900 mb-6 tracking-tighter">申請單已送出</h3>
-            <p class="text-blue-600 leading-relaxed mb-6 text-lg font-black underline underline-offset-8 decoration-4">
+            <p class="text-blue-600 leading-relaxed mb-6 text-lg font-black underline underline-offset-8 decoration-4 whitespace-nowrap">
                 請記得將平板設備寄出
             </p>
             <p class="text-slate-400 leading-relaxed mb-12 text-sm font-medium">
@@ -392,7 +392,6 @@
             setupScrollProgress();
         };
 
-        // 手機版進度條邏輯
         function setupScrollProgress() {
             window.onscroll = function() {
                 const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
@@ -405,7 +404,7 @@
         function updateTotal() {
             const method = document.getElementById('shippingMethod').value;
             let shipFee = 200;
-            if (method === "客戶自取") shipFee = 0;
+            if (method === "客戶來回自取") shipFee = 0;
             if (method === "來回件") shipFee = 400;
             
             document.getElementById('displayShipping').innerText = shipFee.toLocaleString();
